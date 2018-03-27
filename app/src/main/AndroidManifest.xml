@@ -16,6 +16,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".AllAlarms" />
+        <activity android:name=".AlarmEdit" />
+        <activity android:name=".AllSounds" />
+        <activity android:name=".SoundsEdit" />
+        <activity android:name=".ChooseVibration" />
+        <activity android:name=".ChooseSong" />
+        <activity android:name=".ChoosePreDownloaded" />
+        <activity android:name=".ChooseRecording" />
+        <activity android:name=".MakeRecording" />
+        <activity android:name=".SongCrop"></activity>
     </application>
 
 </manifest>
