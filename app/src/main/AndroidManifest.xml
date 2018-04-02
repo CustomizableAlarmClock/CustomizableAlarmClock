@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".Home">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,7 +25,11 @@
         <activity android:name=".ChoosePreDownloaded" />
         <activity android:name=".ChooseRecording" />
         <activity android:name=".MakeRecording" />
-        <activity android:name=".SongCrop"></activity>
+        <activity android:name=".SongCrop" />
+        <activity android:name=".AlarmRepeat" />
+        <activity android:name=".AlarmName" />
+        <activity android:name=".SoundName" />
+        <activity android:name=".Help"></activity>
     </application>
 
 </manifest>
