@@ -16,7 +16,8 @@
         android:text="@string/ButtonAddItem"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/EditTextAddAlarm" />
+        app:layout_constraintStart_toEndOf="@+id/EditTextAddAlarm"
+        android:layout_marginRight="8dp" />
 
     <ListView
         android:id="@+id/SpecificAlarms"
@@ -44,5 +45,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/ButtonAddItems"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/SpecificAlarms" />
+        app:layout_constraintTop_toBottomOf="@+id/SpecificAlarms"
+        android:layout_marginRight="7dp"
+        android:layout_marginLeft="11dp" />
 </android.support.constraint.ConstraintLayout>

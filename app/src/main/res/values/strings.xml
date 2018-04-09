@@ -1,23 +1,33 @@
 <resources>
-
-    //Home
+    <!--Home-->
     <string name="app_name">CustomizableAlarmClock</string>
     <string name="PressToContinue">Press to Continue</string>
 
-    //AllAlarms
-    <string name="SpecificAlarms">Specific Alarms</string>
-    <string name="EditTextAddAlarm">Enter the Name of Alarm</string>
+    <!--AllAlarms-->
     <string name="ButtonAddItem">Add New Alarm</string>
+    <string name="EditTextAddAlarm">Enter the Name of Alarm</string>
 
-    //AlarmEdit
-    <string name="ButtonRepeat">Repeat</string>
-    <string name="Repeat">Repeat</string>
-    <string name="Snooze">Snooze</string>
+    <!--AlarmEdit-->
     <string name="SwitchSnooze">Snooze</string>
     <string name="Delete">Delete Alarm</string>
     <string name="EditSoundsButton">EditSounds</string>
+    <string name="Repeat">Repeat</string>
 
-//Alarmname
-    <string name="PLAY">PLAY</string>
+    <!--AlarmRepeat-->
+    <string name="buttonSunday">Every Sunday</string>
+    <string name="buttonMonday">Every Monday</string>
+    <string name="buttonTuesday">Every Tuesday</string>
+    <string name="buttonWednesday">Every Wednesday</string>
+    <string name="buttonThursday">Every Thursday</string>
+    <string name="buttonFriday">Every Friday</string>
+    <string name="buttonSaturday">Every Saturday</string>
+    <string name="textRepeat">Repeat</string>
+
+    <!--SoundsEdit-->
+    <string name="buttonSoundName">Sound Name</string>
+    <string name="buttonDeleteSound">Delete Sound</string>
+
+    <!--SoundName-->
+    <string name="editTextChangeSoundName">Sound Name</string>
 
 </resources>

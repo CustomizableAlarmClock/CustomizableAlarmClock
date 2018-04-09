@@ -29,7 +29,8 @@
         android:text="@string/SwitchSnooze"
         app:layout_constraintBottom_toTopOf="@+id/DeleteAlarm"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/timePicker" />
+        app:layout_constraintTop_toBottomOf="@+id/timePicker"
+        android:layout_marginRight="52dp" />
 
     <Button
         android:id="@+id/DeleteAlarm"
@@ -39,7 +40,8 @@
         android:layout_marginEnd="50dp"
         android:text="@string/Delete"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginRight="50dp" />
 
     <Button
         android:id="@+id/EditSoundsButton"
@@ -48,8 +50,10 @@
         android:layout_marginBottom="16dp"
         android:layout_marginStart="50dp"
         android:text="@string/EditSoundsButton"
+        android:onClick="editSounds"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginLeft="50dp" />
 
     <Button
         android:id="@+id/Repeat"
@@ -59,9 +63,11 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="30dp"
         android:text="@string/Repeat"
+        android:onClick="repeat"
         app:layout_constraintBottom_toTopOf="@+id/EditSoundsButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/timePicker" />
+        app:layout_constraintTop_toBottomOf="@+id/timePicker"
+        android:layout_marginLeft="50dp" />
 
 
 

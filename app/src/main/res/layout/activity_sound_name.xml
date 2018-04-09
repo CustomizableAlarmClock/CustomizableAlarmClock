@@ -4,6 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.derek.customizablealarmclock.SoundName">
+    tools:context="com.example.derek.customizablealarmclock.SoundName"
+    tools:layout_editor_absoluteY="81dp">
 
+    <EditText
+        android:id="@+id/editTextChangeSoundName"
+        android:layout_width="352dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="192dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="@string/editTextChangeSoundName"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>

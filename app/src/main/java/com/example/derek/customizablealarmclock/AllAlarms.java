@@ -34,15 +34,15 @@ public class AllAlarms extends AppCompatActivity {
 
 
         //If you click on the specific alarm in the list it will take you to alarm edit screen
-        final ListView listView = (ListView) findViewById(R.id.SpecificAlarms);
+        final ListView listView = findViewById(R.id.SpecificAlarms);
         final String items[]=new String[] {"Alarm1","Alarm2","Alarm3","Alarm4"};
         arrayList=new ArrayList<>(Arrays.asList(items));
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,arrayList);
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, arrayList);
         listView.setAdapter(adapter);
 
         //Add items with edit text
-        txtInput=(EditText)findViewById(R.id.EditTextAddAlarm);
-        Button btAdd = (Button)findViewById(R.id.ButtonAddItems);
+        txtInput= findViewById(R.id.EditTextAddAlarm);
+        Button btAdd = findViewById(R.id.ButtonAddItems);
         btAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,7 +55,7 @@ public class AllAlarms extends AppCompatActivity {
                 //Log.d("AllAlarms",arrayList.toString());
             }
                                  });
-        
+
 
 
         //If you click on the specific alarm in the list it will take you to alarm edit screen
@@ -65,20 +65,16 @@ public class AllAlarms extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                if(i>=0) {
-                    Intent myintent = new Intent(view.getContext(),AlarmEdit.class);
-                    startActivityForResult(myintent,0);
+            if(i>=0) {
+                Intent myintent = new Intent(view.getContext(),AlarmEdit.class);
+                startActivityForResult(myintent,0);
 
-                }
-
-
+            }
 
             }
         });
-
-
-
-    }}
+    }
+}
 
 
 
