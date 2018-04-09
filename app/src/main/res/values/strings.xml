@@ -1,3 +1,23 @@
 <resources>
+
+    //Home
     <string name="app_name">CustomizableAlarmClock</string>
+    <string name="PressToContinue">Press to Continue</string>
+
+    //AllAlarms
+    <string name="SpecificAlarms">Specific Alarms</string>
+    <string name="EditTextAddAlarm">Enter the Name of Alarm</string>
+    <string name="ButtonAddItem">Add New Alarm</string>
+
+    //AlarmEdit
+    <string name="ButtonRepeat">Repeat</string>
+    <string name="Repeat">Repeat</string>
+    <string name="Snooze">Snooze</string>
+    <string name="SwitchSnooze">Snooze</string>
+    <string name="Delete">Delete Alarm</string>
+    <string name="EditSoundsButton">EditSounds</string>
+
+//Alarmname
+    <string name="PLAY">PLAY</string>
+
 </resources>

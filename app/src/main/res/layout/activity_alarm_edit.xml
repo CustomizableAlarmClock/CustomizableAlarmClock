@@ -8,93 +8,59 @@
 
     <TimePicker
         android:id="@+id/timePicker"
-        android:layout_width="371dp"
-        android:layout_height="345dp"
+        android:layout_width="364dp"
+        android:layout_height="353dp"
+        android:layout_marginBottom="30dp"
         android:layout_marginEnd="35dp"
         android:layout_marginStart="35dp"
         android:layout_marginTop="5dp"
-        app:layout_constraintBottom_toTopOf="@+id/ButtonRepeat"
+        app:layout_constraintBottom_toTopOf="@+id/Repeat"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/ButtonRepeat"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="15dp"
-        android:layout_marginEnd="35dp"
-        android:text="@string/ButtonRepeat"
-        app:layout_constraintBottom_toTopOf="@+id/SwitchSnooze"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/Repeat"
-        app:layout_constraintTop_toBottomOf="@+id/timePicker" />
-
-    <TextView
-        android:id="@+id/Repeat"
-        android:layout_width="0dp"
-        android:layout_height="22dp"
-        android:layout_marginBottom="19dp"
-        android:layout_marginEnd="56dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="13dp"
-        android:text="@string/Repeat"
-        app:layout_constraintBottom_toTopOf="@+id/Snooze"
-        app:layout_constraintEnd_toStartOf="@+id/ButtonRepeat"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/timePicker" />
-
-    <TextView
-        android:id="@+id/Snooze"
-        android:layout_width="0dp"
-        android:layout_height="22dp"
-        android:layout_marginBottom="18dp"
-        android:layout_marginEnd="63dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="15dp"
-        android:text="@string/Snooze"
-        app:layout_constraintBottom_toTopOf="@+id/EditSounds"
-        app:layout_constraintEnd_toStartOf="@+id/SwitchSnooze"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ButtonRepeat" />
-
     <Switch
         android:id="@+id/SwitchSnooze"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="13dp"
-        android:layout_marginEnd="81dp"
+        android:layout_width="128dp"
+        android:layout_height="31dp"
+        android:layout_marginBottom="26dp"
+        android:layout_marginEnd="52dp"
+        android:layout_marginTop="37dp"
         android:text="@string/SwitchSnooze"
-        app:layout_constraintBottom_toTopOf="@+id/EditSounds"
+        app:layout_constraintBottom_toTopOf="@+id/DeleteAlarm"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/Snooze"
-        app:layout_constraintTop_toBottomOf="@+id/ButtonRepeat" />
-
-    <TextView
-        android:id="@+id/EditSounds"
-        android:layout_width="93dp"
-        android:layout_height="37dp"
-        android:layout_marginBottom="27dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginStart="36dp"
-        android:text="@string/EditSounds"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/DeleteAlarm"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/SwitchSnooze" />
+        app:layout_constraintTop_toBottomOf="@+id/timePicker" />
 
     <Button
         android:id="@+id/DeleteAlarm"
-        android:layout_width="152dp"
-        android:layout_height="42dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginEnd="114dp"
-        android:layout_marginTop="10dp"
+        android:layout_width="133dp"
+        android:layout_height="43dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="50dp"
         android:text="@string/Delete"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/EditSounds"
-        app:layout_constraintTop_toTopOf="@+id/EditSounds"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/EditSoundsButton"
+        android:layout_width="130dp"
+        android:layout_height="41dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="50dp"
+        android:text="@string/EditSoundsButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/Repeat"
+        android:layout_width="128dp"
+        android:layout_height="46dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/Repeat"
+        app:layout_constraintBottom_toTopOf="@+id/EditSoundsButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timePicker" />
 
 </android.support.constraint.ConstraintLayout>

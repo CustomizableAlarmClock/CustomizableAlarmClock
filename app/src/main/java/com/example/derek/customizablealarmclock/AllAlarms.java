@@ -17,30 +17,44 @@ import java.util.ArrayList;
 
 public class AllAlarms extends AppCompatActivity {
 
+
+  //  private ArrayList<String> items;
+  //  private ArrayAdapter<String> itemsAdapter;
+  //  private ListView lvItems;
+
+    String items[]=new String[] {"Alarm1","Alarm2","Alarm3","Alarm4"};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_alarms);
 
-        Button ButtonAddItems = findViewById(R.id.ButtonAddItems);
-        ButtonAddItems.setOnClickListener(new View.OnClickListener() {
+
+        //If you click on the alarm it will take you to alarm edit screen
+        ListView listView = (ListView) findViewById(R.id.SpecificAlarms);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
+        listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            //If you click on the alarm it will take you to alarm edit screen
             @Override
-            public void onClick(View view) {
-                openAlarmEdit();
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                if(i>=0) {
+                    Intent myintent = new Intent(view.getContext(),AlarmEdit.class);
+                    startActivityForResult(myintent,0);
+
+                }
+
+
+
             }
         });
 
-    }
 
 
-    public void openAlarmEdit() {
+    }}
 
-        Intent intent2  = new Intent(this, AlarmEdit.class);
-        startActivity(intent2);
-    }
-
-
-}
 
 
 
