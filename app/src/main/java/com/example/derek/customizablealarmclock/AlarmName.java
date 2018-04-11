@@ -8,9 +8,6 @@ import android.widget.Button;
 
 public class AlarmName extends AppCompatActivity {
 
-
-MediaPlayer mySong;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,6 +15,4 @@ MediaPlayer mySong;
 
 
     }
-
-
 }

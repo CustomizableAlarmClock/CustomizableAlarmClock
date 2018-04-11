@@ -11,9 +11,3 @@ public class SongCrop extends AppCompatActivity {
         setContentView(R.layout.activity_song_crop);
     }
 }
-
-
-
-
-
-//hjkhjkhjkf

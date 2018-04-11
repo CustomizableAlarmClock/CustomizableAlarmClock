@@ -23,7 +23,7 @@ public class AlarmEdit extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alarm_edit);
 
-        timePicker = (TimePicker) findViewById(R.id.timePicker);
+        timePicker = findViewById(R.id.timePicker);
         findViewById(R.id.ButtonSetAlarm).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,7 +62,9 @@ public class AlarmEdit extends AppCompatActivity {
         Intent intent = new Intent(this, AlarmReceiver.class); //
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
 
-        alarmManager.setRepeating(AlarmManager.RTC, timeInMillis, AlarmManager.INTERVAL_DAY, pendingIntent);
+        if (alarmManager != null) {
+            alarmManager.setRepeating(AlarmManager.RTC, timeInMillis, AlarmManager.INTERVAL_DAY, pendingIntent);
+        }
         Toast.makeText(this, "Alarm is set", Toast.LENGTH_SHORT).show(); //shows message that alarm is set
     }
 

@@ -52,7 +52,9 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/SwitchSnooze"
-        app:layout_constraintVertical_bias="0.516" />
+        app:layout_constraintVertical_bias="0.516"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="56dp" />
 
     <Button
         android:id="@+id/EditSoundsButton"
@@ -68,7 +70,9 @@
         app:layout_constraintEnd_toStartOf="@+id/DeleteAlarm"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ButtonRepeat" />
+        app:layout_constraintTop_toBottomOf="@+id/ButtonRepeat"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="26dp" />
 
     <Button
         android:id="@+id/ButtonSetAlarm"
@@ -96,7 +100,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.004"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="8dp" />
 
 </android.support.constraint.ConstraintLayout>
