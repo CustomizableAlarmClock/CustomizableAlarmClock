@@ -29,7 +29,8 @@
         <activity android:name=".AlarmRepeat" />
         <activity android:name=".AlarmName" />
         <activity android:name=".SoundName" />
-        <activity android:name=".Help"></activity>
+        <activity android:name=".Help" />
+        <receiver android:name=".AlarmReceiver" />
     </application>
 
 </manifest>

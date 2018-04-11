@@ -8,8 +8,6 @@ import android.widget.Button;
 
 public class Home extends AppCompatActivity {
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,21 +19,11 @@ public class Home extends AppCompatActivity {
                 openAllAlarms();
             }
         });
-
     }
 
-
         public void openAllAlarms() {
-
             Intent intent  = new Intent(this, AllAlarms.class);
             startActivity(intent);
     }
-
-
-
-
-
-
-
 
 }

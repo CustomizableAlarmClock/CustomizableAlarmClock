@@ -10,8 +10,9 @@
     <!--AlarmEdit-->
     <string name="SwitchSnooze">Snooze</string>
     <string name="Delete">Delete Alarm</string>
-    <string name="EditSoundsButton">EditSounds</string>
-    <string name="Repeat">Repeat</string>
+    <string name="EditSoundsButton">Edit Sounds</string>
+    <string name="ButtonRepeat">Repeat</string>
+    <string name="ButtonSetAlarm">Set Alarm</string>
 
     <!--AlarmRepeat-->
     <string name="buttonSunday">Every Sunday</string>
@@ -25,9 +26,21 @@
 
     <!--SoundsEdit-->
     <string name="buttonSoundName">Sound Name</string>
+    <string-array name="sources">
+        <item> </item>
+        <item>Song</item>
+        <item>Pre-downloaded Sound</item>
+        <item>Vibration</item>
+        <item>Voice Recording</item>
+    </string-array>
     <string name="buttonDeleteSound">Delete Sound</string>
 
     <!--SoundName-->
     <string name="editTextChangeSoundName">Sound Name</string>
+
+    <!--ChooseRecording-->
+    <string name="buttonMakeRecording">Make Recording</string>
+
+
 
 </resources>
