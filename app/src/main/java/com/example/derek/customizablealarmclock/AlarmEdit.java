@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 public class AlarmEdit extends AppCompatActivity {
-    TimePicker timePicker;
+    TimePicker timePicker; //creates TimePicker
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
