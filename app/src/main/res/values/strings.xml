@@ -24,6 +24,11 @@
     <string name="buttonSaturday">Every Saturday</string>
     <string name="textRepeat">Repeat</string>
 
+    <!--AllSounds-->
+    <string name="EditTextAddSound">New Sound</string>
+    <string name="ButtonAddSound">Add Sound</string>
+    <string name="ButtonToAlarmEdit">Back</string>
+
     <!--SoundsEdit-->
     <string name="buttonSoundName">Sound Name</string>
     <string-array name="sources">
@@ -40,5 +45,9 @@
 
     <!--ChooseRecording-->
     <string name="buttonMakeRecording">Make Recording</string>
+
+    <!--AlarmReceiverScreen-->
+    <string name="ButtonStopAlarm">Stop</string>
+    <string name="TextViewAlarm">Alarm</string>
 
 </resources>

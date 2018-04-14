@@ -30,7 +30,10 @@
         <activity android:name=".AlarmName" />
         <activity android:name=".SoundName" />
         <activity android:name=".Help" />
+
         <receiver android:name=".AlarmReceiver" />
+
+        <activity android:name=".AlarmReceiverScreen"></activity>
     </application>
 
 </manifest>

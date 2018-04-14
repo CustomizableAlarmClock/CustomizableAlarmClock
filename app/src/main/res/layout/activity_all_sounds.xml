@@ -4,19 +4,67 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.derek.customizablealarmclock.AllSounds">
+    tools:context="com.example.derek.customizablealarmclock.AllSounds"
+    tools:layout_editor_absoluteY="89dp">
+
+    <Button
+        android:id="@+id/ButtonAddSound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/ButtonAddSound"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/ButtonToAlarmEdit"
+        app:layout_constraintStart_toEndOf="@+id/EditTextAddSound"
+        android:selectAllOnFocus="true" />
+
 
     <ListView
-        android:id="@+id/listView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
+        android:id="@+id/AllSounds"
+        android:layout_width="584dp"
+        android:layout_height="750dp"
+        android:layout_marginBottom="17dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/ButtonAddSound"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/EditTextAddSound"
+        android:layout_width="0dp"
+        android:layout_height="38dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="189dp"
+        android:layout_marginStart="94dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="@string/EditTextAddSound"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/ButtonToAlarmEdit"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/AllSounds"
+        app:layout_constraintVertical_bias="1.0"
+        android:layout_marginLeft="94dp"
+        android:layout_marginRight="189dp" />
+
+    <Button
+        android:id="@+id/ButtonToAlarmEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="4dp"
+        android:onClick="toAlarmEdit"
+        android:text="@string/ButtonToAlarmEdit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/EditTextAddSound"
+        android:layout_marginRight="4dp" />
+
+
 </android.support.constraint.ConstraintLayout>
 
