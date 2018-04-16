@@ -1,15 +1,15 @@
 package com.example.derek.customizablealarmclock;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -58,8 +58,9 @@ public class AllAlarms extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
             if(i>=0) {
-                Intent myintent = new Intent(view.getContext(),AlarmEdit.class);
-                startActivityForResult(myintent,0);
+                Intent intent = new Intent(view.getContext(),AlarmEdit.class);
+                intent.putExtra("requestCode",0);
+                startActivityForResult(intent,0);
             }
             }
         });

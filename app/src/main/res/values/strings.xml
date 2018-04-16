@@ -25,9 +25,8 @@
     <string name="textRepeat">Repeat</string>
 
     <!--AllSounds-->
-    <string name="EditTextAddSound">New Sound</string>
     <string name="ButtonAddSound">Add Sound</string>
-    <string name="ButtonToAlarmEdit">Back</string>
+    <string name="ButtonToAlarmEdit">Save</string>
 
     <!--SoundsEdit-->
     <string name="buttonSoundName">Sound Name</string>
@@ -39,6 +38,7 @@
         <item>Voice Recording</item>
     </string-array>
     <string name="buttonDeleteSound">Delete Sound</string>
+    <string name="ButtonSoundsEditDone">Done</string>
 
     <!--SoundName-->
     <string name="editTextChangeSoundName">Sound Name</string>
@@ -49,5 +49,6 @@
     <!--AlarmReceiverScreen-->
     <string name="ButtonStopAlarm">Stop</string>
     <string name="TextViewAlarm">Alarm</string>
+
 
 </resources>

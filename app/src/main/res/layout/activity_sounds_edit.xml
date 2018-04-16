@@ -50,4 +50,21 @@
             android:layout_marginStart="0dp" />
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/ButtonSoundsEditDone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="497dp"
+        android:layout_marginTop="761dp"
+        android:text="@string/ButtonSoundsEditDone"
+        android:onClick="toAllSounds"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="497dp"
+        android:layout_marginEnd="16dp" />
 </android.support.constraint.ConstraintLayout>

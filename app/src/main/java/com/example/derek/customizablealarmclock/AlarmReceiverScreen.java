@@ -12,24 +12,23 @@ import java.util.ArrayList;
 
 public class AlarmReceiverScreen extends AppCompatActivity {
     MediaPlayer mp; //creates the MediaPlayer to play sounds
+    ArrayList<Sound> sounds;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alarm_receiver_screen);
 
         //imports and creates a list of file names
-        Bundle bundle = getIntent().getExtras();
-        final ArrayList<String> sounds;
-
+        final Bundle bundle = getIntent().getExtras();
         final Button button = findViewById(R.id.ButtonStopAlarm); //creates the button that stops the alarm
         final Intent intent = new Intent(this, AlarmEdit.class); //creates the intent to go to the AlarmEdit page
 
         //only plays sounds if there are sounds in the list
         try{
-            sounds = bundle.getStringArrayList("files"); //ArrayList for the list of file names of the sounds to be played in the alarm
+            sounds = bundle.getParcelableArrayList("Sounds"); //ArrayList for the list of file names of the sounds to be played in the alarm
 
             //plays the sounds
-            int soundID = AlarmReceiverScreen.this.getResources().getIdentifier(sounds.get(0), "raw",AlarmReceiverScreen.this.getPackageName()); //creates the sound id for the first sound
+            int soundID = AlarmReceiverScreen.this.getResources().getIdentifier(sounds.get(0).getFileName(), "raw",AlarmReceiverScreen.this.getPackageName()); //creates the sound id for the first sound
             mp = MediaPlayer.create(AlarmReceiverScreen.this,soundID); //puts the first sound in the MediaPlayer
             mp.start(); //starts playing the first sound
             int i = 1;
@@ -38,7 +37,7 @@ public class AlarmReceiverScreen extends AppCompatActivity {
                 //checks if there is already a sound playing (prevents all the sounds from playing at once
                 if(!mp.isPlaying()){
                     mp.release(); //releases the resources of the MediaPlayer
-                    soundID = AlarmReceiverScreen.this.getResources().getIdentifier(sounds.get(i), "raw",AlarmReceiverScreen.this.getPackageName()); //creates the sound id for the rest of the sounds
+                    soundID = AlarmReceiverScreen.this.getResources().getIdentifier(sounds.get(i).getFileName(), "raw",AlarmReceiverScreen.this.getPackageName()); //creates the sound id for the rest of the sounds
                     mp= MediaPlayer.create(AlarmReceiverScreen.this,soundID); //puts a sound in the MediaPlayer
                     mp.start(); //starts playing the sound in the MediaPlayer
                     i++;
@@ -51,7 +50,12 @@ public class AlarmReceiverScreen extends AppCompatActivity {
         //checks if the stop alarm button has been pressed
         button.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                mp.stop(); //stops the sound if the stop alarm button is pressed
+                mp.stop();//stops the sound if the stop alarm button is pressed
+                int requestCode = bundle.getInt("requestCode");
+                Log.d("AlarmReceiverScreen", String.valueOf(requestCode));
+                Log.d("AlarmReceiverScreen", String.valueOf(sounds.size()));
+                intent.putExtra("requestCode",requestCode);
+                intent.putExtra("Sounds",sounds);
                 startActivity(intent);//goes to the AlarmEdit page
             }
         });
