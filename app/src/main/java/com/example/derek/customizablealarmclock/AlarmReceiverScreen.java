@@ -35,13 +35,6 @@ public class AlarmReceiverScreen extends AppCompatActivity {
             int i = 1;
             //checks the size of the file names and plays that many sounds
             while(i < sounds.size()){
-                //checks if the stop alarm button has been pressed
-                button.setOnClickListener(new View.OnClickListener(){
-                    public void onClick(View v){
-                        mp.stop(); //stops the sound if the stop alarm button is pressed
-                        startActivity(intent);//goes to the AlarmEdit page
-                    }
-                });
                 //checks if there is already a sound playing (prevents all the sounds from playing at once
                 if(!mp.isPlaying()){
                     mp.release(); //releases the resources of the MediaPlayer
@@ -55,5 +48,12 @@ public class AlarmReceiverScreen extends AppCompatActivity {
         catch(NullPointerException e){
             Log.d("AlarmReceiverScreen", "Null, no sounds in list");
         }
+        //checks if the stop alarm button has been pressed
+        button.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                mp.stop(); //stops the sound if the stop alarm button is pressed
+                startActivity(intent);//goes to the AlarmEdit page
+            }
+        });
     }
 }

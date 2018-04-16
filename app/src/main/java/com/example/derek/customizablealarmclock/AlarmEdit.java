@@ -73,7 +73,7 @@ public class AlarmEdit extends AppCompatActivity {
         intent.putExtra("files",fileNames); //moves sounds to be played to the AlarmReceiver
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
         if (alarmManager != null) {
-            alarmManager.setRepeating(AlarmManager.RTC, timeInMillis, AlarmManager.INTERVAL_DAY, pendingIntent);
+            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, timeInMillis, AlarmManager.INTERVAL_DAY, pendingIntent);
         }
         Toast.makeText(this, "Alarm is set", Toast.LENGTH_SHORT).show(); //shows message that alarm is set
     }
