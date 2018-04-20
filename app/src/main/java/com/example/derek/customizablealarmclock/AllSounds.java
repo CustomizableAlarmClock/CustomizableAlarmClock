@@ -85,7 +85,7 @@ public class AllSounds extends AppCompatActivity {
     public void makeSounds(){
         //creates Sound objects
         Sound s1 = new Sound("First Sound", "sound0007");
-        Sound s2 = new Sound("Second Sound", "sound0009");
+        //Sound s2 = new Sound("Second Sound", "sound0009");
         //Sound s3 = new Sound("Third Sound", "sound0020");
         //Sound s4 = new Sound("Fourth Sound", "sound0029");
         //Sound s5 = new Sound("Fifth Sound", "sound0253");
@@ -93,7 +93,7 @@ public class AllSounds extends AppCompatActivity {
         //creates the list of Sounds
         sounds = new ArrayList<>();
         sounds.add(s1);
-        sounds.add(s2);
+        //sounds.add(s2);
         //sounds.add(s3);
         //sounds.add(s4);
         //sounds.add(s5);

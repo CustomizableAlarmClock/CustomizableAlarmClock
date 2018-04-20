@@ -13,6 +13,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+
         Toast.makeText(context, "ALARM", Toast.LENGTH_LONG).show(); //notifies that alarm went off
 
         //creates the ArrayList of file names of the sounds to be played
