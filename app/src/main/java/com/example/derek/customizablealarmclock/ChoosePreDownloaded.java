@@ -3,6 +3,7 @@ package com.example.derek.customizablealarmclock;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -11,28 +12,31 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 public class ChoosePreDownloaded extends AppCompatActivity {
-
-    int requestCode;
+    Controller c;
+    //int requestCode;
+    int alarmID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_pre_downloaded);
 
+        c = (Controller) getApplicationContext();
+
         //creates the Sound objects for the different sounds
-        Sound pd1 = new Sound("Ring 1 (0003)","sound0003");
-        Sound pd2 = new Sound("Ring 2 (0004)","sound0004");
-        Sound pd3 = new Sound("Ring 3 (0005)","sound0005");
-        Sound pd4 = new Sound("Ring 4 (0006)", "sound0006");
-        Sound pd5 = new Sound("Ring 5 (0007)", "sound0007");
-        Sound pd6 = new Sound("Ring 6 (0008)", "sound0008");
-        Sound pd7 = new Sound("Ring 7 (0009)", "sound0009");
-        Sound pd8 = new Sound("Ring 8 (0011)", "sound0011");
-        Sound pd9 = new Sound("Ring 9 (0012)", "sound0012");
-        Sound pd10 = new Sound("Ring 10 (0016)", "sound0016");
-        Sound pd11 = new Sound("Ring 11 (0020)", "sound0020");
-        Sound pd12 = new Sound("Ring 12 (0029)", "sound0029");
-        Sound pd13 = new Sound("Ring 13 (0134)", "sound0134");
-        Sound pd14 = new Sound("Ring 14 (0253)", "sound0253");
+        Sound pd1 = new Sound("Ring 1 (0003)","sound0003", c.getAlarms().get(c.getCurrentAlarmID()).getSounds().size());
+        Sound pd2 = new Sound("Ring 2 (0004)","sound0004", c.getAlarms().get(c.getCurrentAlarmID()).getSounds().size());
+        Sound pd3 = new Sound("Ring 3 (0005)","sound0005", c.getAlarms().get(c.getCurrentAlarmID()).getSounds().size());
+        Sound pd4 = new Sound("Ring 4 (0006)", "sound0006", c.getAlarms().get(c.getCurrentAlarmID()).getSounds().size());
+        Sound pd5 = new Sound("Ring 5 (0007)", "sound0007", c.getAlarms().get(c.getCurrentAlarmID()).getSounds().size());
+        Sound pd6 = new Sound("Ring 6 (0008)", "sound0008", c.getAlarms().get(c.getCurrentAlarmID()).getSounds().size());
+        Sound pd7 = new Sound("Ring 7 (0009)", "sound0009", c.getAlarms().get(c.getCurrentAlarmID()).getSounds().size());
+        Sound pd8 = new Sound("Ring 8 (0011)", "sound0011", c.getAlarms().get(c.getCurrentAlarmID()).getSounds().size());
+        Sound pd9 = new Sound("Ring 9 (0012)", "sound0012", c.getAlarms().get(c.getCurrentAlarmID()).getSounds().size());
+        Sound pd10 = new Sound("Ring 10 (0016)", "sound0016", c.getAlarms().get(c.getCurrentAlarmID()).getSounds().size());
+        Sound pd11 = new Sound("Ring 11 (0020)", "sound0020", c.getAlarms().get(c.getCurrentAlarmID()).getSounds().size());
+        Sound pd12 = new Sound("Ring 12 (0029)", "sound0029", c.getAlarms().get(c.getCurrentAlarmID()).getSounds().size());
+        Sound pd13 = new Sound("Ring 13 (0134)", "sound0134", c.getAlarms().get(c.getCurrentAlarmID()).getSounds().size());
+        Sound pd14 = new Sound("Ring 14 (0253)", "sound0253", c.getAlarms().get(c.getCurrentAlarmID()).getSounds().size());
 
         //creates the ArrayList of PreDownloaded Sound objects that the user can choose from
         final ArrayList<Sound> preDownloaded = new ArrayList<>();
@@ -67,10 +71,15 @@ public class ChoosePreDownloaded extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 if(i>=0) {
+                    Log.d("Predownload", String.valueOf(preDownloaded.get(i)));
+                    c.getAlarms().get(alarmID).getSounds().add(preDownloaded.get(i));
                     Intent intent = new Intent(view.getContext(),SoundsEdit.class);
-                    intent.putExtra("Sound",preDownloaded.get(i));
-                    setResult(RESULT_OK,intent);
-                    finish();
+
+                    startActivity(intent);
+                    //intent.putExtra("Sound",preDownloaded.get(i));
+
+                    //setResult(RESULT_OK,intent);
+                    //finish();
                 }
             }
         });

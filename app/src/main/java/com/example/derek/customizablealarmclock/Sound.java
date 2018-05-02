@@ -13,11 +13,15 @@ import android.os.Parcelable;
 public class Sound implements Parcelable{
     private String soundName;
     private String fileName;
+    private int id;
+    //private double duration;
 
     //creates a Sound object
-    Sound(String soundName, String fileName){
+    Sound(String soundName, String fileName, int id){
         this.soundName = soundName;
         this.fileName = fileName;
+        this.id = id;
+        //this.duration = duration;
     }
 
     //returns the name of the sound
@@ -30,14 +34,29 @@ public class Sound implements Parcelable{
         return fileName;
     }
 
+    //returns the id number of the sound object
+    public int getId(){
+        return id;
+    }
+
+    /*//returns the duration of the Sound
+    public double getDuration(){
+        return duration;
+    }*/
+
     //changes the name of the sound
-    public void changeSoundName(String soundName){
+    public void setSoundName(String soundName){
         this.soundName = soundName;
     }
 
     //changes the file name
-    public void changeFileName(String fileName){
+    public void setFileName(String fileName){
         this.fileName = fileName;
+    }
+
+    //changes the id of the sound object
+    public void setId(int id){
+        this.id = id;
     }
 
     //write object values to parcel for storage

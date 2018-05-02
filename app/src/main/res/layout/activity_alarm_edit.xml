@@ -9,14 +9,13 @@
 
     <TimePicker
         android:id="@+id/timePicker"
-        android:layout_width="0dp"
+        android:layout_width="601dp"
         android:layout_height="487dp"
-        android:layout_marginBottom="25dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
         android:paddingTop="0dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -24,11 +23,11 @@
         android:id="@+id/linearLayout5"
         android:layout_width="585dp"
         android:layout_height="45dp"
-        android:layout_marginBottom="1dp"
+        android:layout_marginBottom="9dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/timePicker">
 
         <Button
@@ -45,84 +44,154 @@
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/linearLayout4"
-        android:layout_width="585dp"
+        android:layout_width="593dp"
         android:layout_height="48dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout5">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout7">
 
 
         <Button
-            android:id="@+id/ButtonRepeat"
-            android:layout_width="227dp"
+            android:id="@+id/ButtonChangeAlarmName"
+            android:layout_width="215dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="1dp"
+            android:layout_marginStart="30dp"
+            android:onClick="setAlarmName"
+            android:text="@string/ButtonChangeAlarmName"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/ButtonRepeat"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginRight="1dp"
+            android:layout_marginLeft="30dp" />
+
+        <Button
+            android:id="@+id/ButtonRepeat"
+            android:layout_width="215dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="30dp"
             android:onClick="repeat"
             android:text="@string/ButtonRepeat"
-            app:layout_constraintBottom_toTopOf="@+id/EditSoundsButton"
-            app:layout_constraintEnd_toStartOf="@+id/SwitchSnooze"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintHorizontal_chainStyle="spread_inside"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ButtonSetAlarm"
-            tools:ignore="NotSibling" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ButtonChangeAlarmName"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            tools:ignore="NotSibling"
+            android:layout_marginRight="30dp" />
+
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/linearLayout7"
+        android:layout_width="match_parent"
+        android:layout_height="28dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout5">
 
         <Switch
             android:id="@+id/SwitchSnooze"
-            android:layout_width="218dp"
-            android:layout_height="47dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
             android:text="@string/SwitchSnooze"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/ButtonRepeat"
-            app:layout_constraintTop_toBottomOf="@+id/timePicker"
-            tools:ignore="NotSibling" />
-
-
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
+            tools:ignore="NotSibling"
+            tools:layout_conversion_absoluteHeight="47dp"
+            tools:layout_conversion_absoluteWidth="600dp" />
     </android.support.constraint.ConstraintLayout>
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/linearLayout3"
         android:layout_width="585dp"
         android:layout_height="49dp"
+        android:layout_marginBottom="44dp"
+        android:layout_marginTop="8dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/timePicker"
-        app:layout_constraintVertical_bias="0.72">
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
 
 
         <Button
             android:id="@+id/EditSoundsButton"
-            android:layout_width="227dp"
-            android:layout_height="47dp"
+            android:layout_width="215dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="1dp"
+            android:layout_marginStart="30dp"
             android:onClick="editSounds"
             android:text="@string/EditSoundsButton"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/SwitchSnooze"
+            app:layout_constraintEnd_toStartOf="@+id/DeleteAlarm"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ButtonRepeat"
+            app:layout_constraintTop_toTopOf="parent"
             tools:ignore="NotSibling"
             tools:layout_conversion_absoluteHeight="40dp"
-            tools:layout_conversion_absoluteWidth="128dp" />
+            tools:layout_conversion_absoluteWidth="128dp"
+            android:layout_marginRight="1dp"
+            android:layout_marginLeft="30dp" />
 
         <Button
             android:id="@+id/DeleteAlarm"
             android:layout_width="215dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="140dp"
-            android:layout_marginStart="140dp"
+            android:layout_marginEnd="30dp"
             android:text="@string/Delete"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/EditSoundsButton"
-            app:layout_constraintTop_toBottomOf="@+id/SwitchSnooze"
+            app:layout_constraintTop_toTopOf="parent"
             tools:ignore="NotSibling"
             tools:layout_conversion_absoluteHeight="40dp"
-            tools:layout_conversion_absoluteWidth="128dp" />
+            tools:layout_conversion_absoluteWidth="128dp"
+            android:layout_marginRight="30dp" />
 
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/linearLayout6"
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+
+        <Button
+            android:id="@+id/ButtonAlarmEditSave"
+            android:layout_width="142dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:layout_marginEnd="35dp"
+            android:layout_marginStart="424dp"
+            android:onClick="save"
+            android:text="@string/ButtonAlarmEditSave"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginRight="35dp"
+            android:layout_marginLeft="424dp" />
 
     </android.support.constraint.ConstraintLayout>
 

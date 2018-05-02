@@ -1,8 +1,4 @@
 <resources>
-    <!--Home-->
-    <string name="app_name">CustomizableAlarmClock</string>
-    <string name="PressToContinue">Press to Continue</string>
-
     <!--AllAlarms-->
     <string name="ButtonAddItem">Add New Alarm</string>
     <string name="EditTextAddAlarm">Enter the Name of Alarm</string>
@@ -13,6 +9,13 @@
     <string name="EditSoundsButton">Edit Sounds</string>
     <string name="ButtonRepeat">Repeat</string>
     <string name="ButtonSetAlarm">Set Alarm</string>
+    <string name="ButtonAlarmEditSave">Save</string>
+    <string name="ButtonChangeAlarmName">Alarm Name</string>
+    <string name="SwtichAlarmActive">Alarm Active</string>
+
+    <!--AlarmName-->
+    <string name="EditTextChangeAlarmName">Alarm Name</string>
+    <string name="ButtonAlarmNameSave">Save</string>
 
     <!--AlarmRepeat-->
     <string name="buttonSunday">Every Sunday</string>
@@ -24,9 +27,24 @@
     <string name="buttonSaturday">Every Saturday</string>
     <string name="textRepeat">Repeat</string>
 
+    <!--AlarmReceiverScreen-->
+    <string name="ButtonStopAlarm">Stop</string>
+    <string name="TextViewAlarm">Alarm</string>
+
     <!--AllSounds-->
     <string name="ButtonAddSound">Add Sound</string>
     <string name="ButtonToAlarmEdit">Save</string>
+
+    <!--ChooseRecording-->
+    <string name="buttonMakeRecording">Make Recording</string>
+
+    <!--Home-->
+    <string name="app_name">CustomizableAlarmClock</string>
+    <string name="PressToContinue">Press to Continue</string>
+
+    <!--SoundName-->
+    <string name="editTextChangeSoundName">Sound Name</string>
+    <string name="ButtonSaveSoundName">Save</string>
 
     <!--SoundsEdit-->
     <string name="buttonSoundName">Sound Name</string>
@@ -39,16 +57,4 @@
     </string-array>
     <string name="buttonDeleteSound">Delete Sound</string>
     <string name="ButtonSoundsEditDone">Done</string>
-
-    <!--SoundName-->
-    <string name="editTextChangeSoundName">Sound Name</string>
-
-    <!--ChooseRecording-->
-    <string name="buttonMakeRecording">Make Recording</string>
-
-    <!--AlarmReceiverScreen-->
-    <string name="ButtonStopAlarm">Stop</string>
-    <string name="TextViewAlarm">Alarm</string>
-
-
 </resources>
