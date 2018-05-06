@@ -7,29 +7,21 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 public class SoundsEdit extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-    //ArrayList<Sound> sounds;
-    //int requestCode;
-    //Sound s;
-    int alarmID;
-    Controller c;
+    int alarmID; //variable to keep track which alarm data to use
+    Controller c; //Controller to handle the data
+    int soundID; //variable to keep track which sound data to use
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sounds_edit);
 
+        //defines some variables
         c = (Controller) getApplicationContext();
-        Bundle bundle = getIntent().getExtras();
         alarmID = c.getCurrentAlarmID();
-        /*sounds = bundle.getParcelableArrayList("Sounds");
-        requestCode = bundle.getInt("requestCode");
-        if(requestCode==1 || requestCode==0){
-            //Log.d("SoundsEdit", String.valueOf(sounds.size()));
-            Log.d("SoundsEdit", String.valueOf(requestCode));
-            s = bundle.getParcelable("Sound");
-        }*/
-
+        soundID = c.getCurrentSoundID();
 
         //Drop down menu to choose sound source
         Spinner spinner = findViewById(R.id.spinnerSoundSource);
@@ -39,59 +31,49 @@ public class SoundsEdit extends AppCompatActivity implements AdapterView.OnItemS
         spinner.setOnItemSelectedListener(this);
     }
 
-    /*//executes when the user returns from the ChoosePreDownloaded page; takes the sound that the user chose
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        this.requestCode = requestCode;
-        if(requestCode==1 || requestCode==0){
-            Bundle bundle = data.getExtras();
-            s = bundle.getParcelable("Sound");
-        }
-    }*/
-
-    //goes to AllSounds page, passing the sounds that will be played in the alarm
+    //goes to AllSounds page
     public void toAllSounds(View v){
         Intent intent = new Intent(this, AllSounds.class);
         startActivity(intent);
-        //intent.putExtra("Sound",s);
-        //setResult(RESULT_OK,intent); //triggers onActivityResult method in AllSounds
-        //finish();
     }
 
-    //goes to page to change sound name
+    //goes to SoundName page
     public void changeSoundName(View v){
-        //goes to SoundName
         Intent intent = new Intent(this, SoundName.class);
-        //intent.putExtra("Sounds",sounds);
+        startActivity(intent);
+    }
+
+    //deletes a sound
+    public void delete(View v){
+        Intent intent = new Intent(this, AllSounds.class);
+        c.getAlarms().get(alarmID).getSounds().remove(soundID);
+        Toast.makeText(getApplicationContext(), "Sound Deleted", Toast.LENGTH_LONG).show();
         startActivity(intent);
     }
 
     @Override
     //goes to the choose source pages when clicked
+    //https://stackoverflow.com/questions/19914511/how-to-start-another-activity-when-click-on-item-from-spinner-items
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         Intent intent;
-        String text = adapterView.getItemAtPosition(i).toString();
         switch (i){
             case 0:
                 break;
             case 1:
                 intent = new Intent(this, ChooseSong.class);
                 startActivity(intent);
-                //startActivityForResult(intent,requestCode);
                 break;
             case 2:
                 intent = new Intent(this, ChoosePreDownloaded.class);
                 startActivity(intent);
-                //startActivityForResult(intent,requestCode);
                 break;
             case 3:
                 intent = new Intent(this, ChooseVibration.class);
                 startActivity(intent);
-                //startActivityForResult(intent,requestCode);
                 break;
             case 4:
                 intent = new Intent(this, ChooseRecording.class);
                 startActivity(intent);
-                //startActivityForResult(intent,requestCode);
                 break;
         }
     }

@@ -5,103 +5,87 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.derek.customizablealarmclock.AlarmRepeat"
-    tools:layout_editor_absoluteY="81dp">
+    tools:layout_editor_absoluteY="89dp">
 
-    <LinearLayout
+    <android.support.constraint.ConstraintLayout
         android:id="@+id/linearLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/textRepeat"
-            android:layout_width="match_parent"
-            android:layout_height="42dp"
+            android:id="@+id/TextViewRepeat"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_marginBottom="73dp"
             android:paddingTop="5dp"
-            android:text="@string/textRepeat"
+            android:text="@string/TextViewRepeat"
             android:textAlignment="center"
             android:textColor="@android:color/black"
             android:textSize="30sp"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="14dp" />
-
-        <Button
-            android:id="@+id/buttonSunday"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:enabled="true"
-            android:linksClickable="false"
-            android:onClick="chooseRepeat"
-            android:text="@string/buttonSunday"
-            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/ListViewRepeat"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            tools:layout_editor_absoluteY="433dp" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
 
-        <Button
-            android:id="@+id/buttonMonday"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="chooseRepeat"
-            android:text="@string/buttonMonday"
-            android:textSize="18sp"
-            tools:layout_editor_absoluteX="17dp"
-            tools:layout_editor_absoluteY="117dp" />
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/linearLayout8"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="44dp"
+            app:layout_constraintBottom_toTopOf="@+id/ListViewRepeat"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <Button
-            android:id="@+id/buttonTuesday"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="chooseRepeat"
-            android:text="@string/buttonTuesday"
-            android:textSize="18sp"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="165dp" />
+            <TextView
+                android:id="@+id/TextViewCurrentRepeatingLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="133dp"
+                android:text="@string/TextViewCurrentRepeatingLabel"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/TextViewCurrentRepeating"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/buttonWednesday"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="chooseRepeat"
-            android:text="@string/buttonWednesday"
-            android:textSize="18sp"
-            tools:layout_editor_absoluteX="17dp"
-            tools:layout_editor_absoluteY="214dp" />
+            <TextView
+                android:id="@+id/TextViewCurrentRepeating"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginEnd="255dp"
+                android:layout_marginStart="10dp"
+                android:text="@string/TextViewCurrentRepeating"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/TextViewCurrentRepeatingLabel"
+                app:layout_constraintTop_toTopOf="parent" />
+        </android.support.constraint.ConstraintLayout>
 
-        <Button
-            android:id="@+id/buttonThursday"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="chooseRepeat"
-            android:text="@string/buttonThursday"
-            android:textSize="18sp"
-            tools:layout_editor_absoluteX="17dp"
-            tools:layout_editor_absoluteY="264dp" />
+        <ListView
+            android:id="@+id/ListViewRepeat"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout8">
 
-        <Button
-            android:id="@+id/buttonFriday"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="chooseRepeat"
-            android:text="@string/buttonFriday"
-            android:textSize="18sp"
-            tools:layout_editor_absoluteX="17dp"
-            tools:layout_editor_absoluteY="313dp" />
+        </ListView>
 
-        <Button
-            android:id="@+id/buttonSaturday"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="chooseRepeat"
-            android:text="@string/buttonSaturday"
-            android:textSize="18sp"
-            tools:layout_editor_absoluteX="17dp"
-            tools:layout_editor_absoluteY="362dp" />
-
-    </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
 
 </android.support.constraint.ConstraintLayout>
 

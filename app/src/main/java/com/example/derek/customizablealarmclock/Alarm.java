@@ -20,7 +20,7 @@ public class Alarm {
     private int id;
 
     //create an Alarm object
-    Alarm(String alarmName, ArrayList<Sound> sounds, AlarmTime time, long timeLeft, int repeat, boolean isActive, boolean snoozeActive, int id){
+    public Alarm(String alarmName, ArrayList<Sound> sounds, AlarmTime time, long timeLeft, int repeat, boolean isActive, boolean snoozeActive, int id){
         this.alarmName = alarmName;
         this.sounds = sounds;
         this.time = time;
@@ -31,7 +31,7 @@ public class Alarm {
         this.id = id;
     }
 
-    Alarm(){
+    public Alarm(){
         alarmName = "Alarm";
         sounds = new ArrayList<>();
         time = new AlarmTime();

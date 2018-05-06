@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 /**
  * Created by Derek on 4/27/2018.
+ * Controller to handle data
  */
 
 public class Controller extends Application {
@@ -17,8 +18,8 @@ public class Controller extends Application {
         alarms.add(a);
     }
 
-    public void removeAlarm(Alarm a){
-
+    public void removeAlarm(int i){
+        alarms.remove(i);
     }
 
     public void updateAlarm(Alarm a){

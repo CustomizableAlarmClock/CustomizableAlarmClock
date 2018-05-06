@@ -11,25 +11,20 @@
     <string name="ButtonSetAlarm">Set Alarm</string>
     <string name="ButtonAlarmEditSave">Save</string>
     <string name="ButtonChangeAlarmName">Alarm Name</string>
-    <string name="SwtichAlarmActive">Alarm Active</string>
 
     <!--AlarmName-->
     <string name="EditTextChangeAlarmName">Alarm Name</string>
     <string name="ButtonAlarmNameSave">Save</string>
 
     <!--AlarmRepeat-->
-    <string name="buttonSunday">Every Sunday</string>
-    <string name="buttonMonday">Every Monday</string>
-    <string name="buttonTuesday">Every Tuesday</string>
-    <string name="buttonWednesday">Every Wednesday</string>
-    <string name="buttonThursday">Every Thursday</string>
-    <string name="buttonFriday">Every Friday</string>
-    <string name="buttonSaturday">Every Saturday</string>
-    <string name="textRepeat">Repeat</string>
+    <string name="TextViewRepeat">Repeat</string>
+    <string name="TextViewCurrentRepeatingLabel">Current Repeat: </string>
+    <string name="TextViewCurrentRepeating">Repeat</string>
 
     <!--AlarmReceiverScreen-->
     <string name="ButtonStopAlarm">Stop</string>
     <string name="TextViewAlarm">Alarm</string>
+    <string name="ButtonSnooze">Snooze</string>
 
     <!--AllSounds-->
     <string name="ButtonAddSound">Add Sound</string>

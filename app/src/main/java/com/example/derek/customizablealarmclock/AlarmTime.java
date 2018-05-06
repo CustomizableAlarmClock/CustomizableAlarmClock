@@ -15,7 +15,8 @@ public class AlarmTime {
     private int hour;
     private int minute;
 
-    AlarmTime(int year, int month, int day, int hour, int minute){
+    //Constructor for the AlarmTime
+    public AlarmTime(int year, int month, int day, int hour, int minute){
         this.year = year;
         this.month = month;
         this.day = day;
@@ -23,7 +24,8 @@ public class AlarmTime {
         this.minute = minute;
     }
 
-    AlarmTime(){
+    //default Constructor for the AlarmTime - 1 hour after the current time
+    public AlarmTime(){
         Calendar c = Calendar.getInstance();
         year = c.get(Calendar.YEAR);
         month = c.get(Calendar.MONTH);
@@ -35,46 +37,30 @@ public class AlarmTime {
             hour = c.get(Calendar.HOUR_OF_DAY);
         }
         minute = c.get(Calendar.MINUTE);
-
     }
 
+    //gets the year that the alarm is to go off at
     public int getYear(){
         return year;
     }
 
+    //gets the month that the alarm is to go off at
     public int getMonth(){
         return month;
     }
 
+    //gets the day that the alarm is to go off at
     public int getDay(){
         return day;
     }
 
+    //gets the hour that the alarm is to go off at
     public int getHour(){
         return hour;
     }
 
+    //returns the minute that the alarm is to go off at
     public int getMinute(){
         return minute;
-    }
-
-    public void setYear(int year){
-        this.year = year;
-    }
-
-    public void setMonth(int month){
-        this.month = month;
-    }
-
-    public void setDay(int day){
-        this.day = day;
-    }
-
-    public void setHour(int hour){
-        this.hour = hour;
-    }
-
-    public void setMinute(int minute){
-        this.minute = minute;
     }
 }

@@ -8,147 +8,152 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.CompoundButton;
+import android.widget.DatePicker;
+import android.widget.Switch;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.util.Calendar;
 
 public class AlarmEdit extends AppCompatActivity {
-    TimePicker timePicker; //creates TimePicker for user to choose
-    //ArrayList<String> fileNames; //creates ArrayList to store the sounds to be played in the alarm
-    //AllSounds s = new AllSounds(); //creates AllSound object to pull the sounds to be played
-    //int requestCode;
-    Alarm alarm;
-    int alarmID;
-    //ArrayList<Sound> sounds;
-    Controller c;
-    Calendar calendar = Calendar.getInstance();
-    AlarmTime time;
+    TimePicker timePicker; //creates TimePicker for user to choose the time
+    DatePicker datePicker; //creates DatePicker for a user to choose the date
+    int alarmID; //variable to keep track which alarm data to use
+    Controller c; //Controller to handle the data
+    Calendar calendar; //creates a new Calendar
+    AlarmTime time; //creates a new AlarmTime object
+    Switch s; //snooze switch
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alarm_edit);
 
+        //defines some variables
         c = (Controller) getApplicationContext();
-        Bundle bundle = getIntent().getExtras();
         alarmID = c.getCurrentAlarmID();
+        calendar = Calendar.getInstance();
 
-        /*requestCode = bundle.getInt("requestCode");
-        alarm = c.getAlarms().get(alarmID);
-        Log.d("asdfcode", String.valueOf(requestCode));
-        if(requestCode==1){
-            sounds = new ArrayList<>();
-            sounds = bundle.getParcelableArrayList("Sounds");
-        }
-        else{
-            s.makeSounds(); //prepares the sound files to be imported into this Java class from the AllSounds page
-        }
-
-        //makes sure there are actually sounds in the alarm
-        try {
-            if(requestCode==1){
-                fileNames = new ArrayList<>();
-                for(int i = 0; i<sounds.size(); i++){
-                    fileNames.add(sounds.get(i).getFileName());
-                }
-            }
-            else {
-                fileNames = s.getFileNames(); //gets the sound files to be played
-            }
-
-        }
-        catch (NullPointerException e){
-            Log.d("AlarmEdit","fileNames Null");
-        }*/
-
+        //displays the alarm date and time that it is supposed to go of at, if exists. If not, sets the default date and time
+        //https://developer.android.com/reference/android/widget/TimePicker
+        //https://developer.android.com/reference/android/widget/DatePicker
         timePicker = findViewById(R.id.timePicker);
+        datePicker = findViewById(R.id.DatePicker);
         if(Build.VERSION.SDK_INT >= 23){
+            datePicker.updateDate(c.getAlarms().get(alarmID).getTime().getYear(), c.getAlarms().get(alarmID).getTime().getMonth(), c.getAlarms().get(alarmID).getTime().getDay());
             timePicker.setHour(c.getAlarms().get(alarmID).getTime().getHour());
             timePicker.setMinute(c.getAlarms().get(alarmID).getTime().getMinute());
         }
         else{
+            datePicker.updateDate(c.getAlarms().get(alarmID).getTime().getYear(), c.getAlarms().get(alarmID).getTime().getMonth(), c.getAlarms().get(alarmID).getTime().getDay());
             timePicker.setCurrentHour(c.getAlarms().get(alarmID).getTime().getHour());
             timePicker.setCurrentMinute(c.getAlarms().get(alarmID).getTime().getMinute());
         }
 
+        //sets the alarm
+        //https://www.concretepage.com/android/android-alarm-clock-tutorial-to-schedule-and-cancel-alarmmanager-pendingintent-and-wakefulbroadcastreceiver-example
         findViewById(R.id.ButtonSetAlarm).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            //gets the current date/time and gets the time the user set when the button Set Alarm is clicked
-
-
-            if (android.os.Build.VERSION.SDK_INT >= 23) {
-                calendar.set(
-                    calendar.get(Calendar.YEAR),
-                    calendar.get(Calendar.MONTH),
-                    calendar.get(Calendar.DAY_OF_MONTH),
-                    timePicker.getHour(),
-                    timePicker.getMinute(),
-                    0
-                );
-                time = new AlarmTime(calendar.get(Calendar.YEAR),
-                        calendar.get(Calendar.MONTH),
-                        calendar.get(Calendar.DAY_OF_MONTH),
-                        timePicker.getHour(),
-                        timePicker.getMinute());
-            } else {
-                calendar.set(
-                    calendar.get(Calendar.YEAR),
-                    calendar.get(Calendar.MONTH),
-                    calendar.get(Calendar.DAY_OF_MONTH),
-                    timePicker.getCurrentHour(),
-                    timePicker.getCurrentMinute(),
-                    0
-                );
-                time = new AlarmTime(calendar.get(Calendar.YEAR),
-                        calendar.get(Calendar.MONTH),
-                        calendar.get(Calendar.DAY_OF_MONTH),
-                        timePicker.getCurrentHour(),
-                        timePicker.getCurrentMinute());
+                //sets the alarm only if there are sounds in the alarm
+                if(c.getAlarms().get(c.getCurrentAlarmID()).getSounds().size()>0) {
+                    saveAlarmTime(); //gets the time that the alarm goes off at
+                    setAlarm(calendar.getTimeInMillis()); //sets the alarm
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "No Sounds in Alarm", Toast.LENGTH_LONG).show();
+                }
             }
+        });
 
-            c.getAlarms().get(alarmID).setTime(time);
-            c.getAlarms().get(alarmID).setTimeLeft(calendar.getTimeInMillis());
-            setAlarm(calendar.getTimeInMillis()); //sets the alarm
+        //snooze button
+        //https://android--code.blogspot.com/2015/08/android-switch-button-listener.html
+        //https://developer.android.com/reference/android/widget/Switch.html
+        Switch s = findViewById(R.id.SwitchSnooze);
+        s.setChecked(c.getAlarms().get(c.getCurrentAlarmID()).getSnoozeActive()); //displays if snooze is enabled
+        s.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                //sets if snooze is enabled
+                if(isChecked){
+                    c.getAlarms().get(alarmID).setSnoozeActive(true);
+                }
+                else{
+                    c.getAlarms().get(alarmID).setSnoozeActive(false);
+                }
             }
         });
     }
 
+    //gets the time that the alarm goes off at
+    public void saveAlarmTime(){
+        if (android.os.Build.VERSION.SDK_INT >= 23) {
+            //puts into a calendar object the time the alarm goes off at
+            calendar.set(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth(), timePicker.getHour(), timePicker.getMinute(), 0);
+            //creates a new AlarmTime object with the time that the alarm goes off at
+            time = new AlarmTime(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth(), timePicker.getHour(), timePicker.getMinute());
+        }
+        else {
+            //puts into a calendar object the time the alarm goes off at
+            calendar.set(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth(), timePicker.getCurrentHour(), timePicker.getCurrentMinute(), 0);
+            //creates a new AlarmTime object with the time that the alarm goes off at
+            time = new AlarmTime(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth(), timePicker.getCurrentHour(), timePicker.getCurrentMinute());
+        }
+
+        c.getAlarms().get(alarmID).setTime(time); //puts the time that the alarm goes off into the controller
+        c.getAlarms().get(alarmID).setTimeLeft(calendar.getTimeInMillis()); //puts the time in milliseconds that the alarm goes off into the controller
+    }
+
     //sets the alarm
-    private void setAlarm(long timeInMillis) {
+    //https://developer.android.com/reference/android/app/AlarmManager.html
+    //https://developer.android.com/training/scheduling/alarms
+    public void setAlarm(long timeInMillis) {
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 
         //goes to receiver when alarm goes off
         Intent intent = new Intent(this, AlarmReceiver.class); //creates intent to go to the AlarmReceiver
-
-        /*intent.putExtra("Sounds",sounds); //moves sounds to be played to the AlarmReceiver
-        intent.putExtra("requestCode",requestCode);
-        Log.d("files", String.valueOf(fileNames.size()));
-        Log.d("AlarmEdit2",String.valueOf(sounds.size()));
-        Log.d("AlarmEdit2",String.valueOf(requestCode));*/
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1, intent, 0);
-        //Log.d("AlarmEdit3",String.valueOf(sounds.size()));
         if (alarmManager != null) {
-            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, timeInMillis, AlarmManager.INTERVAL_DAY, pendingIntent);
+            //switch deals with repeats: case 1: repeats every hour; case 2: repeats every day; case 3; repeats every week; default: no repeat
+            switch (c.getAlarms().get(alarmID).getRepeat()){
+                case 1:
+                    alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, timeInMillis, AlarmManager.INTERVAL_HOUR, pendingIntent);
+                    break;
+                case 2:
+                    alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, timeInMillis, AlarmManager.INTERVAL_DAY, pendingIntent);
+                    break;
+                case 3:
+                    alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, timeInMillis, AlarmManager.INTERVAL_DAY*7, pendingIntent);
+                    break;
+                default:
+                    alarmManager.set(AlarmManager.RTC_WAKEUP, timeInMillis, pendingIntent);
+                    break;
+            }
         }
-        //Log.d("AlarmEdit4",String.valueOf(sounds.size()));
 
         Toast.makeText(this, "Alarm is set", Toast.LENGTH_SHORT).show(); //shows message that alarm is set
-        //Log.d("AlarmEdit5",String.valueOf(sounds.size()));
     }
 
     //allows user to change the alarm name
     public void setAlarmName(View v){
-        Intent intent = new Intent(this,AlarmName.class);
+        Intent intent = new Intent(this, AlarmName.class);
+        saveAlarmTime();
         startActivity(intent);
     }
 
     //allows user to choose when to repeat alarm
     public void repeat(View v){
         //goes to AlarmRepeat page
-        Intent intent = new Intent(this,AlarmRepeat.class);
-        //intent.putExtra("requestCode",requestCode);
+        Intent intent = new Intent(this, AlarmRepeat.class);
+        saveAlarmTime();
+        startActivity(intent);
+    }
+
+    //deletes an alarm and goes back to AllAlarms
+    public void delete(View v){
+        Intent intent = new Intent(this, AllAlarms.class);
+        c.getAlarms().remove(alarmID);
+        Toast.makeText(getApplicationContext(), "Alarm Deleted", Toast.LENGTH_LONG).show();
         startActivity(intent);
     }
 
@@ -156,50 +161,14 @@ public class AlarmEdit extends AppCompatActivity {
     public void editSounds(View v){
         //goes to AllSounds page
         Intent intent = new Intent(this,AllSounds.class);
-        /*intent.putExtra("requestCode",requestCode);
-        Log.d("AlarmEdit", String.valueOf(requestCode));
-
-        //if songs have been added to the alarm
-        if(requestCode==1) {
-            intent.putExtra("Sounds", sounds);
-        }*/
+        saveAlarmTime();
         startActivity(intent);
     }
 
+    //goes back to the AllAlarms page
     public void save(View v){
         Intent intent = new Intent(this,AllAlarms.class);
-        if (android.os.Build.VERSION.SDK_INT >= 23) {
-            calendar.set(
-                    calendar.get(Calendar.YEAR),
-                    calendar.get(Calendar.MONTH),
-                    calendar.get(Calendar.DAY_OF_MONTH),
-                    timePicker.getHour(),
-                    timePicker.getMinute(),
-                    0
-            );
-            time = new AlarmTime(calendar.get(Calendar.YEAR),
-                    calendar.get(Calendar.MONTH),
-                    calendar.get(Calendar.DAY_OF_MONTH),
-                    timePicker.getHour(),
-                    timePicker.getMinute());
-        } else {
-            calendar.set(
-                    calendar.get(Calendar.YEAR),
-                    calendar.get(Calendar.MONTH),
-                    calendar.get(Calendar.DAY_OF_MONTH),
-                    timePicker.getCurrentHour(),
-                    timePicker.getCurrentMinute(),
-                    0
-            );
-            time = new AlarmTime(calendar.get(Calendar.YEAR),
-                    calendar.get(Calendar.MONTH),
-                    calendar.get(Calendar.DAY_OF_MONTH),
-                    timePicker.getCurrentHour(),
-                    timePicker.getCurrentMinute());
-        }
-
-        c.getAlarms().get(alarmID).setTime(time);
-        c.getAlarms().get(alarmID).setTimeLeft(calendar.getTimeInMillis());
+        saveAlarmTime();
         startActivity(intent);
     }
 }
