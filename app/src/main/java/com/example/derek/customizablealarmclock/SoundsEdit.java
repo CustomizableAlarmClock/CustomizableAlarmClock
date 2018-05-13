@@ -68,10 +68,6 @@ public class SoundsEdit extends AppCompatActivity implements AdapterView.OnItemS
                 startActivity(intent);
                 break;
             case 3:
-                intent = new Intent(this, ChooseVibration.class);
-                startActivity(intent);
-                break;
-            case 4:
                 intent = new Intent(this, ChooseRecording.class);
                 startActivity(intent);
                 break;

@@ -55,7 +55,7 @@ public class AllSounds extends AppCompatActivity {
             @Override
             //Goes to the SoundsEdit page
             public void onClick(View v) {
-            Intent intent = new Intent(listView.getContext(),SoundsEdit.class);
+            Intent intent = new Intent(listView.getContext(), NewSoundSource.class);
             startActivity(intent);
             }
         });
@@ -64,11 +64,11 @@ public class AllSounds extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-            if(i>=0) {
-                Intent intent = new Intent(view.getContext(), SoundsEdit.class);
-                c.setCurrentSoundID(i); //sets the current soundID so that the correct data is used
-                startActivity(intent);
-            }
+                if(i>=0) {
+                    Intent intent = new Intent(view.getContext(), SoundsEdit.class);
+                    c.setCurrentSoundID(i); //sets the current soundID so that the correct data is used
+                    startActivity(intent);
+                }
             }
         });
     }

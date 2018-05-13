@@ -1,7 +1,7 @@
 <resources>
     <!--AllAlarms-->
     <string name="ButtonAddItem">Add New Alarm</string>
-    <string name="EditTextAddAlarm">Enter the Name of Alarm</string>
+    <string name="EditTextAddAlarm">Enter Alarm Name</string>
 
     <!--AlarmEdit-->
     <string name="SwitchSnooze">Snooze</string>
@@ -37,19 +37,29 @@
     <string name="app_name">CustomizableAlarmClock</string>
     <string name="PressToContinue">Press to Continue</string>
 
+    <!--ListViewCustom-->
+    <string name="TextViewListItem">Alarm Name</string>
+    <string name="SwitchAlarmActive">Off</string>
+    <string name="TextViewDisplayRepeat">Repeat</string>
+
     <!--SoundName-->
     <string name="editTextChangeSoundName">Sound Name</string>
     <string name="ButtonSaveSoundName">Save</string>
+    <string name="TextViewAlarmTime">Alarm Time</string>
 
     <!--SoundsEdit-->
     <string name="buttonSoundName">Sound Name</string>
     <string-array name="sources">
-        <item> </item>
+        <item>Change Sound</item>
         <item>Song</item>
         <item>Pre-downloaded Sound</item>
-        <item>Vibration</item>
         <item>Voice Recording</item>
     </string-array>
     <string name="buttonDeleteSound">Delete Sound</string>
     <string name="ButtonSoundsEditDone">Done</string>
+    <string name="ButtonStartRecord">Start Recording</string>
+    <string name="ButtonEndRecord">Stop Recording</string>
+    <string name="ButtonPlay">Play</string>
+    <string name="ButtonStop">Stop</string>
+
 </resources>

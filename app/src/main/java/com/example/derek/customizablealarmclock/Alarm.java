@@ -31,17 +31,6 @@ public class Alarm {
         this.id = id;
     }
 
-    public Alarm(){
-        alarmName = "Alarm";
-        sounds = new ArrayList<>();
-        time = new AlarmTime();
-        timeLeft = 36000000;
-        repeat = 0;
-        isActive = false;
-        snoozeActive = false;
-        id = 0;
-    }
-
     public String getAlarmName(){
         return alarmName;
     }
@@ -75,6 +64,7 @@ public class Alarm {
     }
 
     public void setAlarmName(String newName){
+
         alarmName = newName;
     }
 

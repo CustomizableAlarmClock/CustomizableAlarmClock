@@ -25,7 +25,7 @@ public class AlarmReceiverScreen extends AppCompatActivity {
         //defines some variables
         c = (Controller) getApplicationContext();
         soundIDList = new ArrayList<>();
-        playMediaPlayer = new PlayMediaPlayer(sounds, getApplicationContext(), soundIDList); //sends alarm data to the alarm player thread
+        playMediaPlayer = new PlayMediaPlayer(getApplicationContext(), soundIDList); //sends alarm data to the alarm player thread
         alarmID = c.getCurrentAlarmID();
 
         //if snooze is not enable, it hides the snooze button

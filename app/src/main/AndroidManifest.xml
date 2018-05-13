@@ -3,37 +3,61 @@
     package="com.example.derek.customizablealarmclock">
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
+        android:name=".Controller"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:name="com.example.derek.customizablealarmclock.Controller">
-
-        <activity android:name=".Home">
+        android:theme="@style/AppTheme">
+        <activity android:name=".Home"
+            android:label="Home"
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AllAlarms" />
-        <activity android:name=".AlarmEdit" />
-        <activity android:name=".AllSounds" />
-        <activity android:name=".SoundsEdit" />
-        <activity android:name=".ChooseVibration" />
-        <activity android:name=".ChooseSong" />
-        <activity android:name=".ChoosePreDownloaded" />
-        <activity android:name=".ChooseRecording" />
-        <activity android:name=".MakeRecording" />
-        <activity android:name=".SongCrop" />
-        <activity android:name=".AlarmRepeat" />
-        <activity android:name=".AlarmName" />
-        <activity android:name=".SoundName" />
-        <activity android:name=".Help" />
-        <activity android:name=".AlarmReceiverScreen" />
+        <activity android:name=".AllAlarms"
+            android:label="All Alarms" />
+        <activity android:name=".AlarmEdit"
+            android:label="Edit Alarm"/>
+        <activity android:name=".AllSounds"
+            android:label="All Sounds"/>
+        <activity android:name=".SoundsEdit"
+            android:label="Edit Sound"/>
+        <activity android:name=".ChooseSong"
+            android:label="Choose a Song"/>
+        <activity android:name=".ChoosePreDownloaded"
+            android:label="Choose a Pre-downloaded Sound"/>
+        <activity android:name=".ChooseRecording"
+            android:label="Choose a Recording"/>
+        <activity android:name=".MakeRecording"
+            android:label="Make a Recording"/>
+        <activity android:name=".SongCrop"
+            android:label="Crop a Sound"/>
+        <activity android:name=".AlarmRepeat"
+            android:label="Repeat"/>
+        <activity android:name=".AlarmName"
+            android:label="Change Alarm Name"/>
+        <activity android:name=".SoundName"
+            android:label="Change Sound Name"/>
+        <activity android:name=".Help"
+            android:label="Help"/>
+        <activity android:name=".AlarmReceiverScreen"
+            android:label="Alarm"/>
+        <activity
+            android:name=".NewSoundSource"
+            android:label="Choose Sound Source" />
+
         <receiver android:name=".AlarmReceiver" />
+
+
     </application>
+
 </manifest>

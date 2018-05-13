@@ -19,10 +19,11 @@ public class PlayMediaPlayer implements Runnable {
     private Context context; //Context for the MediaPlayer
     private ArrayList<Integer> soundsID; //ArrayList of soundIDs for the MediaPlayer
     private volatile boolean stop; //Determines if the alarm should be stopped
+    private Controller c;
+    private int alarmID;
 
     //Constructor
-    public PlayMediaPlayer(ArrayList<Sound> sounds, Context context, ArrayList<Integer> soundsID){
-        this.sounds = sounds;
+    public PlayMediaPlayer(Context context, ArrayList<Integer> soundsID){
         this.context = context;
         this.soundsID = soundsID;
         stop = false;
@@ -31,6 +32,9 @@ public class PlayMediaPlayer implements Runnable {
     //executes this method first
     @Override
     public void run() {
+        c = (Controller) context;
+        alarmID = c.getCurrentAlarmID();
+        sounds = c.getAlarms().get(alarmID).getSounds();
         long startTime = System.currentTimeMillis(); //gets the current time in milliseconds
         play(startTime);
     }
@@ -43,19 +47,21 @@ public class PlayMediaPlayer implements Runnable {
             mp.start(); //starts playing the first sound
 
             //checks the size of the list of sounds and plays that many sounds, also makes sure the MediaPlayer has not been called to stop yet
-            Log.d("PlayMP", String.valueOf(sounds.size()));
+            //Log.d("PlayMP", String.valueOf(sounds.size()));
             int i = 1;
             while(i<=sounds.size() && !stop) {
-                //checks if there is already a sound playing (prevents all the sounds from playing at once
+                //checks if there is already a sound playing (prevents all the sounds from playing at once)
                 if (!mp.isPlaying()) {
                     mp.release(); //releases the resources of the MediaPlayer
                     //plays the sounds in the list
                     if(i<sounds.size()){
                         mp = MediaPlayer.create(context, soundsID.get(i)); //puts a sound in the MediaPlayer
+                        Log.d("Sound","Yay");
                     }
                     //plays a one-second-long silent track at the end to prevent the thread from ending before the last sound finishes playing
                     else{
                         mp = MediaPlayer.create(context, R.raw.silent);
+                        Log.d("Sound","silent");
                     }
                     mp.start(); //starts playing the sound in the MediaPlayer
                     i++;
@@ -63,29 +69,31 @@ public class PlayMediaPlayer implements Runnable {
 
                 Thread.sleep(1000); //prevents the while loop from checking too often
                 Log.d("i", String.valueOf(i + " " + sounds.size()));
+                Log.d("stop",String.valueOf(stop));
             }
 
             //if the stop button is pressed, 15 minutes has passed, or the sound size has been reached, the MediaPlayer stops
             if (stop || System.currentTimeMillis() >= startTime + AlarmManager.INTERVAL_FIFTEEN_MINUTES || i == sounds.size()) {
                 mp.stop();
                 mp.release();
+                c.getAlarms().get(alarmID).setActive(false);
+                Log.d("stop","stop");
             }
             //if the end of the list has been reached, and 15 minutes has not passed yet, it loops through the sounds again
             else if(System.currentTimeMillis() < startTime+ AlarmManager.INTERVAL_FIFTEEN_MINUTES){
                 Log.d("repeat","repeat");
                 play(startTime);
             }
-        }
-        catch (NullPointerException e) {
-            Log.d("AlarmReceiverScreen", "Null, no sounds in list");
-        }
-        catch (InterruptedException e) {
+        }  catch (InterruptedException e) {
             e.printStackTrace();
+        } catch (NullPointerException e) {
+            Log.d("PlayMediaPlayer", "Null");
         }
     }
 
     //notifies the MediaPlayer that the user pressed the stop button
     public void requestStop(){
+        Log.d("requestStop","stoppppppppp");
         stop = true;
     }
 }

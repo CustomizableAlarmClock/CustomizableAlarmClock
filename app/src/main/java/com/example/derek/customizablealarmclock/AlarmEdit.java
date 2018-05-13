@@ -7,7 +7,9 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.Switch;
@@ -24,6 +26,8 @@ public class AlarmEdit extends AppCompatActivity {
     Calendar calendar; //creates a new Calendar
     AlarmTime time; //creates a new AlarmTime object
     Switch s; //snooze switch
+    AlarmManager alarmManager;
+    PendingIntent pendingIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,16 +57,33 @@ public class AlarmEdit extends AppCompatActivity {
 
         //sets the alarm
         //https://www.concretepage.com/android/android-alarm-clock-tutorial-to-schedule-and-cancel-alarmmanager-pendingintent-and-wakefulbroadcastreceiver-example
-        findViewById(R.id.ButtonSetAlarm).setOnClickListener(new View.OnClickListener() {
+        final Button setCancel = findViewById(R.id.ButtonSetAlarm);
+        Log.d("aactive",String.valueOf(c.getAlarms().get(alarmID).getIsActive()));
+        if(c.getAlarms().get(alarmID).getIsActive()){
+            setCancel.setText("Cancel Alarm");
+        }
+        else{
+            setCancel.setText("Set Alarm");
+        }
+        setCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //sets the alarm only if there are sounds in the alarm
-                if(c.getAlarms().get(c.getCurrentAlarmID()).getSounds().size()>0) {
-                    saveAlarmTime(); //gets the time that the alarm goes off at
-                    setAlarm(calendar.getTimeInMillis()); //sets the alarm
+                if(c.getAlarms().get(alarmID).getIsActive()){
+                    alarmManager.cancel(pendingIntent);
+                    c.getAlarms().get(alarmID).setActive(false);
+                    setCancel.setText("Set Alarm");
+                    Toast.makeText(getApplicationContext(), "Alarm Cancelled", Toast.LENGTH_LONG).show();
                 }
-                else{
-                    Toast.makeText(getApplicationContext(), "No Sounds in Alarm", Toast.LENGTH_LONG).show();
+                else {
+                    //sets the alarm only if there are sounds in the alarm
+                    if (c.getAlarms().get(c.getCurrentAlarmID()).getSounds().size() > 0) {
+                        saveAlarmTime(); //gets the time that the alarm goes off at
+                        c.getAlarms().get(alarmID).setActive(true);
+                        setCancel.setText("Cancel Alarm");
+                        setAlarm(calendar.getTimeInMillis()); //sets the alarm
+                    } else {
+                        Toast.makeText(getApplicationContext(), "No Sounds in Alarm", Toast.LENGTH_LONG).show();
+                    }
                 }
             }
         });
@@ -108,11 +129,11 @@ public class AlarmEdit extends AppCompatActivity {
     //https://developer.android.com/reference/android/app/AlarmManager.html
     //https://developer.android.com/training/scheduling/alarms
     public void setAlarm(long timeInMillis) {
-        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-
+        alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Log.d("currentmili",String.valueOf(timeInMillis));
         //goes to receiver when alarm goes off
         Intent intent = new Intent(this, AlarmReceiver.class); //creates intent to go to the AlarmReceiver
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1, intent, 0);
+        pendingIntent = PendingIntent.getBroadcast(this, 1, intent, 0);
         if (alarmManager != null) {
             //switch deals with repeats: case 1: repeats every hour; case 2: repeats every day; case 3; repeats every week; default: no repeat
             switch (c.getAlarms().get(alarmID).getRepeat()){
@@ -152,7 +173,7 @@ public class AlarmEdit extends AppCompatActivity {
     //deletes an alarm and goes back to AllAlarms
     public void delete(View v){
         Intent intent = new Intent(this, AllAlarms.class);
-        c.getAlarms().remove(alarmID);
+        c.removeAlarm(alarmID);
         Toast.makeText(getApplicationContext(), "Alarm Deleted", Toast.LENGTH_LONG).show();
         startActivity(intent);
     }
