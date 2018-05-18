@@ -6,47 +6,45 @@
     android:layout_height="match_parent"
     android:background="@drawable/gradient"
     tools:context="com.example.derek.customizablealarmclock.Home"
-    tools:layout_editor_absoluteY="81dp">
-
-    <TimePicker
-        android:id="@+id/DisplayCurrentTime"
-        android:layout_width="0dp"
-        android:layout_height="364dp"
-        android:layout_marginBottom="8dp"
-        android:clickable="false"
-        android:longClickable="false"
-        android:numbersSelectorColor="@android:color/background_light"
-        android:numbersInnerTextColor="@android:color/black"
-        android:numbersBackgroundColor="@drawable/gradient"
-        android:amPmBackgroundColor="@color/colorPrimary"
-        android:amPmTextColor="@android:color/black"
-        android:numbersTextColor="@android:color/black"
-        android:headerBackground="@color/colorPrimary"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+    tools:layout_editor_absoluteY="89dp">
 
     <Button
         android:id="@+id/PressToContinue"
         android:layout_width="234dp"
-        android:layout_height="97dp"
-        android:layout_marginBottom="192dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="71dp"
+        android:background="@color/darker_gray"
         android:text="@string/PressToContinue"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TextClock" />
+
+    <TextClock
+        android:id="@+id/TextClock"
+        android:layout_width="530dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="436dp"
+        android:layout_marginTop="64dp"
+        android:textAlignment="center"
+        android:textSize="64sp"
+        app:layout_constraintBottom_toTopOf="@+id/PressToContinue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="261dp"
+        android:layout_height="221dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.992" />
+        app:layout_constraintVertical_bias="0.452"
+        app:srcCompat="@drawable/logo"
+        android:contentDescription="Logo" />
 
 </android.support.constraint.ConstraintLayout>
 

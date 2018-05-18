@@ -5,31 +5,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient"
-    tools:context="com.example.derek.customizablealarmclock.ChooseRecording">
+    tools:context="com.example.derek.customizablealarmclock.ChooseRecording"
+    tools:layout_editor_absoluteY="89dp">
 
     <ListView
-        android:id="@+id/listView3"
+        android:id="@+id/ListViewChooseRecording"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonMakeRecording"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/buttonMakeRecording"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="7dp"
-        android:layout_marginStart="7dp"
-        android:text="@string/buttonMakeRecording"
-        android:onClick="createRecording"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listView3" />
 </android.support.constraint.ConstraintLayout>
 

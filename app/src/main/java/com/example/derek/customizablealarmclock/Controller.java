@@ -13,7 +13,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.UUID;
 
 /**
  * Created by Derek on 4/27/2018.
@@ -24,19 +23,14 @@ public class Controller extends Application {
     private ArrayList<Alarm> alarms = new ArrayList<>();
     private int currentAlarmID;
     private int currentSoundID;
+    private File f;
 
     public void addAlarm(Alarm a){
-        writeToFile(getFileName());
         alarms.add(a);
     }
 
     public void removeAlarm(int i){
-        writeToFile(getFileName());
         alarms.remove(i);
-    }
-
-    public void updateAlarm(Alarm a){
-
     }
 
     public ArrayList<Alarm> getAlarms(){
@@ -48,7 +42,6 @@ public class Controller extends Application {
     }
 
     public void setCurrentAlarmID(int alarmID){
-        writeToFile(getFileName());
         currentAlarmID = alarmID;
     }
 
@@ -57,15 +50,13 @@ public class Controller extends Application {
     }
 
     public void setCurrentSoundID(int soundID){
-        writeToFile(getFileName());
         currentSoundID = soundID;
     }
 
     //creates file name
-    private static String getFileName(){
+    public static String getFileName(){
         String filename;
-        //String dir = getEnvironment().getFilesDir().getAbsolutePath();
-        filename = Environment.getExternalStorageDirectory().getAbsolutePath()+"data.txt";
+        filename = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "data.txt";
         return filename;
     }
 
@@ -74,20 +65,19 @@ public class Controller extends Application {
         FileInputStream fileInputStream;
         BufferedReader inputReader = null;
         try {
-            fileInputStream = openFileInput(filename);
+            fileInputStream = new FileInputStream(f);
             InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
             inputReader = new BufferedReader(inputStreamReader);
-            //inputReader = new BufferedReader (new InputStreamReader(new FileInputStream(filename)));
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
-            File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+ "/" + UUID.randomUUID().toString(), "/data.txt");
         }
 
-        String line = "";
         int i = 0;
         try {
-            while ((line = inputReader.readLine()) !=null){
-                i++;
+            if (inputReader != null) {
+                while (inputReader.readLine() !=null){
+                    i++;
+                }
             }
         }
         catch (IOException e) {
@@ -102,14 +92,21 @@ public class Controller extends Application {
             catch (IOException e) {
                 Log.d("IOException","IOException");
             }
-
-            return i;
         }
+        return i;
     }
 
-
-
     public void getDataFromFile(){
+        f = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "data.txt");
+        Log.d("asdffff","we");
+        if(!f.exists()){
+            Log.d("CREATENEW", "createnewfile");
+            try {
+                f.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         BufferedReader inputReader = null;
         try {
             inputReader = new BufferedReader (new InputStreamReader (new FileInputStream (getFileName())));
@@ -130,58 +127,62 @@ public class Controller extends Application {
 
         try{
             while (i<getFileLength(getFileName())){
+                Log.d("Read",String.valueOf(i));
+                Log.d("Read2",String.valueOf(getFileLength(getFileName())));
                 line = inputReader.readLine();
                 if(line==null){
                     break;
                 }
-                if(line.equals("q35Kz")){
-                    line = inputReader.readLine();
-                    alarmName = line;
-                    line = inputReader.readLine();
-                    timeLeft = Long.parseLong(line);
-                    line = inputReader.readLine();
-                    repeat = Integer.parseInt(line);
-                    line = inputReader.readLine();
-                    isActive = Boolean.parseBoolean(line);
-                    line = inputReader.readLine();
-                    snoozeActive = Boolean.parseBoolean(line);
-                    line = inputReader.readLine();
-                    alarmID = Integer.parseInt(line);
-                    i = i + 6;
+                switch (line) {
+                    case "q35Kz":
+                        line = inputReader.readLine();
+                        alarmName = line;
+                        line = inputReader.readLine();
+                        timeLeft = Long.parseLong(line);
+                        line = inputReader.readLine();
+                        repeat = Integer.parseInt(line);
+                        line = inputReader.readLine();
+                        isActive = Boolean.parseBoolean(line);
+                        line = inputReader.readLine();
+                        snoozeActive = Boolean.parseBoolean(line);
+                        line = inputReader.readLine();
+                        alarmID = Integer.parseInt(line);
+                        i = i + 6;
+                        break;
+                    case "KhC43":
+                        line = inputReader.readLine();
+                        String soundName = line;
+                        line = inputReader.readLine();
+                        Log.d("222111", line);
+                        String fileName = line;
+                        line = inputReader.readLine();
+                        Log.d("22222", line);
+                        int soundID = Integer.parseInt(line);
+                        i = i + 3;
+                        Sound s = new Sound(soundName, fileName, soundID);
+                        sounds.add(s);
+                        break;
+                    case "kSd41911":
+                        line = inputReader.readLine();
+                        int year = Integer.parseInt(line);
+                        line = inputReader.readLine();
+                        int month = Integer.parseInt(line);
+                        line = inputReader.readLine();
+                        int day = Integer.parseInt(line);
+                        line = inputReader.readLine();
+                        int hour = Integer.parseInt(line);
+                        line = inputReader.readLine();
+                        int minute = Integer.parseInt(line);
+                        i = i + 5;
+                        alarmTime = new AlarmTime(year, month, day, hour, minute);
+                        break;
                 }
-                else if(line.equals("KhC43")){
-                    line = inputReader.readLine();
-                    String soundName = line;
-                    line = inputReader.readLine();
-                    String fileName = line;
-                    line = inputReader.readLine();
-                    int soundID = Integer.parseInt(line);
-                    i = i + 3;
-                    Sound s = new Sound(soundName, fileName, soundID);
-                    sounds.add(s);
-                }
-                else if(line.equals("kSd41911")){
-                    line = inputReader.readLine();
-                    int year = Integer.parseInt(line);
-                    line = inputReader.readLine();
-                    int month = Integer.parseInt(line);
-                    line = inputReader.readLine();
-                    int day = Integer.parseInt(line);
-                    line = inputReader.readLine();
-                    int hour = Integer.parseInt(line);
-                    line = inputReader.readLine();
-                    int minute = Integer.parseInt(line);
-                    i = i + 5;
-                    alarmTime = new AlarmTime(year, month, day, hour, minute);
-                }
-
-
                 Alarm a = new Alarm(alarmName, sounds, alarmTime, timeLeft, repeat, isActive, snoozeActive, alarmID);
                 alarms.add(a);
-
-
             }
-            inputReader.close();
+            if (inputReader != null) {
+                inputReader.close();
+            }
         }
         catch(IOException e){
             System.out.println(e.getMessage());
@@ -192,12 +193,27 @@ public class Controller extends Application {
     public void writeToFile (String filename){
         BufferedWriter outputWriter;
         try {
-            outputWriter = new BufferedWriter(new FileWriter(filename, true));
+            //f.delete();
+            /*
+            f = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "data.txt");
+
+            Log.d("asdffff","we");
+                Log.d("CREATENEW", "createnewfile");
+                try {
+                    f.createNewFile();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+*/
+            outputWriter = new BufferedWriter(new FileWriter(filename));
             for(int i = 0; i<alarms.size(); i++){
+                Log.d("i1",String.valueOf(i));
+                Log.d("Alarm Size Controller", String.valueOf(alarms.size()));
                 outputWriter.write("q35Kz");
                 outputWriter.newLine();
                 outputWriter.write(alarms.get(i).getAlarmName());
                 outputWriter.newLine();
+                Log.d("i2",String.valueOf(i));
                 outputWriter.write(String.valueOf(alarms.get(i).getTimeLeft()));
                 outputWriter.newLine();
                 outputWriter.write(String.valueOf(alarms.get(i).getRepeat()));
@@ -206,17 +222,30 @@ public class Controller extends Application {
                 outputWriter.newLine();
                 outputWriter.write(String.valueOf(alarms.get(i).getSnoozeActive()));
                 outputWriter.newLine();
+                Log.d("i3",String.valueOf(i));
                 outputWriter.write(String.valueOf(alarms.get(i).getId()));
                 outputWriter.newLine();
-                for(int j = 0; j<alarms.get(i).getSounds().size(); i++){
-                    outputWriter.write("KhC43");
-                    outputWriter.newLine();
-                    outputWriter.write(alarms.get(i).getSounds().get(j).getSoundName());
-                    outputWriter.newLine();
-                    outputWriter.write(alarms.get(i).getSounds().get(j).getFileName());
-                    outputWriter.newLine();
-                    outputWriter.write(alarms.get(i).getSounds().get(j).getId());
-                    outputWriter.newLine();
+                Log.d("i4",String.valueOf(i));
+                try {
+                    for (int j = 0; j < alarms.get(i).getSounds().size(); j++) {
+                        Log.d("i5",String.valueOf(i));
+                        Log.d("write", String.valueOf(j));
+                        Log.d("write2", String.valueOf(alarms.get(i).getSounds().size()));
+                        outputWriter.write("KhC43");
+                        outputWriter.newLine();
+                        outputWriter.write(alarms.get(i).getSounds().get(j).getSoundName());
+                        outputWriter.newLine();
+                        outputWriter.write(alarms.get(i).getSounds().get(j).getFileName());
+                        outputWriter.newLine();
+                        outputWriter.write(String.valueOf(alarms.get(i).getSounds().get(j).getId()));
+                        outputWriter.newLine();
+                    }
+                }
+                catch (IndexOutOfBoundsException e){
+                    Log.d("Alarm Size", String.valueOf(alarms.size()));
+                    Log.d("i",String.valueOf(i));
+                    Log.d("Sound Size",String.valueOf(alarms.get(i).getSounds().size()));
+
                 }
                 outputWriter.write("kSd41911");
                 outputWriter.newLine();
@@ -230,9 +259,7 @@ public class Controller extends Application {
                 outputWriter.newLine();
                 outputWriter.write(String.valueOf(alarms.get(i).getTime().getMinute()));
                 outputWriter.newLine();
-
             }
-
             outputWriter.flush();
             outputWriter.close();
         }

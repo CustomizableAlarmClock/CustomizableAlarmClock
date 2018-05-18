@@ -22,7 +22,7 @@ public class NewSoundSource extends AppCompatActivity {
         final ListView listView = findViewById(R.id.ListViewSoundSource);
         ArrayList<String> soundSources = new ArrayList<>();
         soundSources.add("Song");
-        soundSources.add("Pre-downloaded Sound");
+        soundSources.add("Default Sound");
         soundSources.add("Voice Recording");
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_expandable_list_item_1, soundSources);
         listView.setAdapter(adapter);
@@ -36,14 +36,17 @@ public class NewSoundSource extends AppCompatActivity {
                 switch (i){
                     case 0:
                         intent = new Intent(view.getContext(), ChooseSong.class);
+                        intent.putExtra("code",0);
                         startActivity(intent);
                         break;
                     case 1:
-                        intent = new Intent(view.getContext(), ChoosePreDownloaded.class);
+                        intent = new Intent(view.getContext(), ChooseDefaultSounds.class);
+                        intent.putExtra("code",0);
                         startActivity(intent);
                         break;
                     case 2:
                         intent = new Intent(view.getContext(), ChooseRecording.class);
+                        intent.putExtra("code",0);
                         startActivity(intent);
                         break;
                     default:

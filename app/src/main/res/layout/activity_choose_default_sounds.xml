@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient"
-    tools:context="com.example.derek.customizablealarmclock.ChoosePreDownloaded"
+    tools:context="com.example.derek.customizablealarmclock.ChooseDefaultSounds"
     tools:layout_editor_absoluteY="89dp">
 
     <ListView

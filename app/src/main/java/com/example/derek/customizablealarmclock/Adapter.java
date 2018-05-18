@@ -3,6 +3,7 @@ package com.example.derek.customizablealarmclock;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +17,8 @@ import java.util.ArrayList;
 //https://www.youtube.com/watch?v=YaIcwyIF2-o
 
 public class Adapter extends ArrayAdapter<String> {
-Controller c;
+    Controller c;
+
     public Adapter(Context context, ArrayList<String> records, Controller c){
         super(context, 0,  records);
         this.c = c;
@@ -58,13 +60,16 @@ Controller c;
 
         alarmName.setText(c.getAlarms().get(position).getAlarmName());
         if(c.getAlarms().get(position).getTime().getMinute()<10){
-            alarmTime.setText(month + "/" + day + "/" + year + " at " + hour + ":0" + minute + ampm);
+            alarmTime.setText(month+1 + "/" + day + "/" + year + " at " + hour + ":0" + minute + " " + ampm);
         }
         else{
-            alarmTime.setText(month + "/" + day + "/" + year + " at " + hour + ":" + minute + ampm);
+            alarmTime.setText(month+1 + "/" + day + "/" + year + " at " + hour + ":" + minute + " " + ampm);
         }
 
-        if(aSwitch.isChecked()){
+        Log.d("switchChecked",String.valueOf(aSwitch.isChecked()));
+        Log.d("switchche",String.valueOf(aSwitch.isActivated()));
+        Log.d("sdfssdf",String.valueOf(c.getAlarms().get(position).getIsActive()));
+        if(c.getAlarms().get(position).getIsActive()){
             aSwitch.setText("On");
         }
         else {
@@ -77,6 +82,8 @@ Controller c;
                 c.getAlarms().get(position).setActive(aSwitch.isChecked());
                 if(aSwitch.isChecked() && c.getAlarms().get(position).getSounds().size()>0){
                     aSwitch.setText("On");
+                    SetAlarm setAlarm = new SetAlarm(getContext(), c.getAlarms().get(position).getRepeat(), c.getAlarms().get(position).getTimeLeft());
+                    setAlarm.setAlarm();
                 }
                 else if(aSwitch.isChecked() && c.getAlarms().get(position).getSounds().size()==0){
                     Toast.makeText(view.getContext(), "No Sounds in Alarm", Toast.LENGTH_LONG).show();
@@ -84,6 +91,8 @@ Controller c;
                 }
                 else {
                     aSwitch.setText("Off");
+                    c.getAlarms().get(position).setActive(false);
+                    Toast.makeText(view.getContext(), "Alarm Cancelled", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -98,6 +107,15 @@ Controller c;
         });
 
         alarmTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), AlarmEdit.class);
+                c.setCurrentAlarmID(position); //sets the current alarmID so that the correct data is used
+                view.getContext().startActivity(intent);
+            }
+        });
+
+        alarmRepeat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), AlarmEdit.class);

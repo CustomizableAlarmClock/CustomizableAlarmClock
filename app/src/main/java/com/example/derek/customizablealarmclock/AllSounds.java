@@ -79,4 +79,12 @@ public class AllSounds extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), "Sounds Saved", Toast.LENGTH_LONG).show();
         startActivity(intent);
     }
+
+    //writes to txt file when activity is destroyed
+    @Override
+    protected void onStop() {
+        super.onStop();
+        c.writeToFile(Controller.getFileName());
+        Log.d("destroy","saved");
+    }
 }

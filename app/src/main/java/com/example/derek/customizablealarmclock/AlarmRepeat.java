@@ -3,6 +3,7 @@ package com.example.derek.customizablealarmclock;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -64,5 +65,13 @@ public class AlarmRepeat extends AppCompatActivity {
             }
             }
         });
+    }
+
+    //writes to txt file when activity is destroyed
+    @Override
+    protected void onStop() {
+        super.onStop();
+        c.writeToFile(c.getFileName());
+        Log.d("destroy","saved");
     }
 }

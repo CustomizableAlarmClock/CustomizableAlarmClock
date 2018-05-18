@@ -22,12 +22,13 @@
             android:id="@+id/buttonSoundName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/darker_gray"
+            android:onClick="changeSoundName"
             android:text="@string/buttonSoundName"
             app:layout_constraintBottom_toTopOf="@+id/spinnerSoundSource"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/space2"
-            android:onClick="changeSoundName"/>
+            app:layout_constraintTop_toBottomOf="@+id/space2" />
 
         <Spinner
             android:id="@+id/spinnerSoundSource"
@@ -44,6 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="0dp"
             android:layout_marginStart="0dp"
+            android:background="@color/darker_gray"
             android:onClick="delete"
             android:text="@string/buttonDeleteSound"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -59,11 +61,11 @@
         android:layout_marginBottom="16dp"
         android:layout_marginStart="497dp"
         android:layout_marginTop="761dp"
-        android:text="@string/ButtonSoundsEditDone"
+        android:background="@color/darker_gray"
         android:onClick="toAllSounds"
+        android:text="@string/ButtonSoundsEditDone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginEnd="16dp" />
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>

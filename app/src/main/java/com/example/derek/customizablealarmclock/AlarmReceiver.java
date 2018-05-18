@@ -17,16 +17,19 @@ http://codetheory.in/android-broadcast-receivers/
 
 public class AlarmReceiver extends BroadcastReceiver {
     Controller c; //Controller to handle the data
+    int alarmID;
     @Override
     public void onReceive(Context context, Intent intent) {
 
         c = (Controller) context.getApplicationContext();
+        alarmID = c.getCurrentAlarmID();
         Toast.makeText(context, "ALARM", Toast.LENGTH_LONG).show(); //notifies that alarm went off
 
         //does not execute if there are no sounds in the list
         try{
+            if(c.getAlarms().get(alarmID).getIsActive()){
             //ArrayList<Sound> sounds = bundle.getParcelableArrayList("Sounds");
-            ArrayList<Sound> sounds = c.getAlarms().get(c.getCurrentAlarmID()).getSounds();
+            ArrayList<Sound> sounds = c.getAlarms().get(alarmID).getSounds();
             Log.d("AlarmReceiver2",String.valueOf(sounds.size()));
 
             //moves the ArrayList of file names to the AlarmReceiverScreen java class
@@ -36,6 +39,7 @@ public class AlarmReceiver extends BroadcastReceiver {
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
             context.startActivity(i); //starts the AlarmReceiverScreen class
+            }
         }
         catch(NullPointerException e){
             Log.d("AlarmReceiver", "NullSoundFiles, can't play sounds");

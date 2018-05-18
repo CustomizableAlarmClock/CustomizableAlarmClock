@@ -3,8 +3,10 @@ package com.example.derek.customizablealarmclock;
 import android.app.AlarmManager;
 import android.content.Context;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.util.Log;
 
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -40,10 +42,19 @@ public class PlayMediaPlayer implements Runnable {
     }
 
     //plays the sounds in the alarm
+    //https://stackoverflow.com/questions/30117443/how-to-play-audio-file-from-phone-internal-storage-in-android
     private void play(long startTime){
         //only plays sounds if there are sounds in the list
         try {
-            mp = MediaPlayer.create(context, soundsID.get(0)); //puts the first sound in the MediaPlayer
+            if(c.getAlarms().get(alarmID).getSounds().get(0).getId()==0) {
+                mp = MediaPlayer.create(context, soundsID.get(0)); //puts the first sound in the MediaPlayer
+            }
+            else {
+                File file = new File(c.getAlarms().get(alarmID).getSounds().get(0).getFileName());
+                Uri myUri1 = Uri.fromFile(file);
+                mp = MediaPlayer.create(context, myUri1);
+                Log.d("asdf","asdf");
+            }
             mp.start(); //starts playing the first sound
 
             //checks the size of the list of sounds and plays that many sounds, also makes sure the MediaPlayer has not been called to stop yet
@@ -55,7 +66,15 @@ public class PlayMediaPlayer implements Runnable {
                     mp.release(); //releases the resources of the MediaPlayer
                     //plays the sounds in the list
                     if(i<sounds.size()){
-                        mp = MediaPlayer.create(context, soundsID.get(i)); //puts a sound in the MediaPlayer
+                        if(c.getAlarms().get(alarmID).getSounds().get(i).getId()==0){
+                            mp = MediaPlayer.create(context, soundsID.get(i)); //puts a sound in the MediaPlayer
+                        }
+                        else {
+                            File file = new File(c.getAlarms().get(alarmID).getSounds().get(i).getFileName());
+                            Uri myUri1 = Uri.fromFile(file);
+                            mp = MediaPlayer.create(context, myUri1);
+                            Log.d("asdf","asdf");
+                        }
                         Log.d("Sound","Yay");
                     }
                     //plays a one-second-long silent track at the end to prevent the thread from ending before the last sound finishes playing

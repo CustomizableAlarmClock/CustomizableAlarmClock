@@ -14,11 +14,11 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:layout_marginEnd="8dp"
+        android:background="@color/darker_gray"
         android:selectAllOnFocus="true"
         android:text="@string/ButtonAddSound"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/ButtonToAlarmEdit"
-        android:layout_marginRight="8dp" />
+        app:layout_constraintEnd_toStartOf="@+id/ButtonToAlarmEdit" />
 
 
     <ListView
@@ -40,11 +40,11 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:layout_marginEnd="4dp"
+        android:background="@color/darker_gray"
         android:onClick="toAlarmEdit"
         android:text="@string/ButtonToAlarmEdit"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginRight="4dp" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
 
 </android.support.constraint.ConstraintLayout>

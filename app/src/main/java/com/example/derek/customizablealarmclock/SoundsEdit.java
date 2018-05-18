@@ -3,6 +3,7 @@ package com.example.derek.customizablealarmclock;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -22,7 +23,6 @@ public class SoundsEdit extends AppCompatActivity implements AdapterView.OnItemS
         c = (Controller) getApplicationContext();
         alarmID = c.getCurrentAlarmID();
         soundID = c.getCurrentSoundID();
-
         //Drop down menu to choose sound source
         Spinner spinner = findViewById(R.id.spinnerSoundSource);
         ArrayAdapter<CharSequence>adapter = ArrayAdapter.createFromResource(this, R.array.sources, android.R.layout.simple_spinner_item);
@@ -61,14 +61,17 @@ public class SoundsEdit extends AppCompatActivity implements AdapterView.OnItemS
                 break;
             case 1:
                 intent = new Intent(this, ChooseSong.class);
+                intent.putExtra("code",1);
                 startActivity(intent);
                 break;
             case 2:
-                intent = new Intent(this, ChoosePreDownloaded.class);
+                intent = new Intent(this, ChooseDefaultSounds.class);
+                intent.putExtra("code",1);
                 startActivity(intent);
                 break;
             case 3:
                 intent = new Intent(this, ChooseRecording.class);
+                intent.putExtra("code",1);
                 startActivity(intent);
                 break;
         }
@@ -77,5 +80,13 @@ public class SoundsEdit extends AppCompatActivity implements AdapterView.OnItemS
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
+    }
+
+    //writes to txt file when activity is destroyed
+    @Override
+    protected void onStop() {
+        super.onStop();
+        c.writeToFile(Controller.getFileName());
+        Log.d("destroy","saved");
     }
 }

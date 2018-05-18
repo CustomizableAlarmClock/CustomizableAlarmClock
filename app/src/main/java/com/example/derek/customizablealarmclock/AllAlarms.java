@@ -75,9 +75,19 @@ public class AllAlarms extends AppCompatActivity {
                 Intent intent = new Intent(view.getContext(),AlarmEdit.class);
                 c.setCurrentAlarmID(i); //sets the current alarmID so that the correct data is used
                 startActivity(intent);
+
             }
             }
         });
+    }
+
+    //writes to txt file when activity is destroyed
+    @Override
+    protected void onStop() {
+        super.onStop();
+        c.writeToFile(Controller.getFileName());
+        Log.d("destroy","saved");
+        Log.d("Alarm Size All Arl",String .valueOf(c.getAlarms().size()));
     }
 
 }
