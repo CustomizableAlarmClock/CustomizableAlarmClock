@@ -11,8 +11,14 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+/**
+ * This page allows the user to choose the source of a new Sound
+ */
 public class NewSoundSource extends AppCompatActivity {
-
+    /**
+     * Creates the NewSoundSource page
+     * @param savedInstanceState Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +35,13 @@ public class NewSoundSource extends AppCompatActivity {
 
         //goes to the source page when an option is clicked on
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
+            /**
+             * Displays the sources in a ListView
+             * @param adapterView the AdapterView that displays the sources
+             * @param view the View
+             * @param i the index of the source
+             * @param l the id of the source
+             */
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent;

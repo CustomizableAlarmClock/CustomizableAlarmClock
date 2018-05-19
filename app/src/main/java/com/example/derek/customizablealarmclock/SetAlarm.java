@@ -7,27 +7,38 @@ import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
+/**
+ * This class sets an Alarm.
+ */
 public class SetAlarm {
     private AlarmManager alarmManager;
     private Context context;
     private int repeat;
     private long timeInMillis;
-    private Intent intent;
     private PendingIntent pendingIntent;
 
+    /**
+     * Constructs a SetAlarm object
+     * @param context the Context
+     * @param repeat the repeat setting
+     * @param timeInMillis the time until the Alarm goes off in milliseconds
+     * @param alarmID the id of the Alarm
+     */
     SetAlarm(Context context, int repeat, long timeInMillis, int alarmID){
         this.context = context;
         this.repeat = repeat;
         this.timeInMillis = timeInMillis;
         alarmManager = (AlarmManager) this.context.getSystemService(Context.ALARM_SERVICE);
-        intent = new Intent(context, AlarmReceiver.class);
+        Intent intent = new Intent(context, AlarmReceiver.class);
         pendingIntent = PendingIntent.getBroadcast(context, alarmID, intent, 0);
     }
 
+    /**
+     * Sets the Alarm
+     */
     public void setAlarm(){
         Log.d("AYYYYYYYY","ASDFDASDFDSA");
         if (alarmManager != null) {
-
             //switch deals with repeats: case 1: repeats every hour; case 2: repeats every day; case 3; repeats every week; default: no repeat
             switch (repeat){
                 case 1:
@@ -44,8 +55,6 @@ public class SetAlarm {
                     break;
             }
         }
-
-            Toast.makeText(context, "Alarm is set", Toast.LENGTH_SHORT).show(); //shows message that alarm is set
-
+        Toast.makeText(context, "Alarm is set", Toast.LENGTH_SHORT).show(); //shows message that alarm is set
     }
 }

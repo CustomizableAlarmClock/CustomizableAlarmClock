@@ -12,26 +12,30 @@ import java.util.ArrayList;
 /**
  * Created by Derek on 4/20/2018.
  * https://developer.android.com/reference/android/media/MediaPlayer
- * New thread to play the sounds in the alarm
+ * New thread to play the Sounds in the Alarm
  */
-
 public class PlayMediaPlayer implements Runnable {
-    private MediaPlayer mp; //creates the MediaPlayer object to play the sounds
     private ArrayList<Sound> sounds; //ArrayList of sounds to be played in the alarm
     private Context context; //Context for the MediaPlayer
     private ArrayList<Integer> soundsID; //ArrayList of soundIDs for the MediaPlayer
     private volatile boolean stop; //Determines if the alarm should be stopped
-    private Controller c;
-    private int alarmID;
+    private Controller c; //Controller to handle the data
+    private int alarmID; //variable to keep track which alarm data to use
 
-    //Constructor
-    public PlayMediaPlayer(Context context, ArrayList<Integer> soundsID){
+    /**
+     * Constructor to create a new PlayMediaPlayer object
+     * @param context the Context
+     * @param soundsID the ArrayList of soundIDs that will be used to play the Sounds
+     */
+    PlayMediaPlayer(Context context, ArrayList<Integer> soundsID){
         this.context = context;
         this.soundsID = soundsID;
         stop = false;
     }
 
-    //executes this method first
+    /**
+     * This method executes when the new thread is created.
+     */
     @Override
     public void run() {
         c = (Controller) context;
@@ -41,11 +45,15 @@ public class PlayMediaPlayer implements Runnable {
         play(startTime);
     }
 
-    //plays the sounds in the alarm
-    //https://stackoverflow.com/questions/30117443/how-to-play-audio-file-from-phone-internal-storage-in-android
+    /**
+     * Plays the Sounds in the Alarm
+     * https://stackoverflow.com/questions/30117443/how-to-play-audio-file-from-phone-internal-storage-in-android
+     * @param startTime the time at which the Alarm went off
+     */
     private void play(long startTime){
         //only plays sounds if there are sounds in the list
         try {
+            MediaPlayer mp;
             if(c.getAlarms().get(alarmID).getSounds().get(0).getId()==0) {
                 mp = MediaPlayer.create(context, soundsID.get(0)); //puts the first sound in the MediaPlayer
             }
@@ -73,9 +81,7 @@ public class PlayMediaPlayer implements Runnable {
                             File file = new File(c.getAlarms().get(alarmID).getSounds().get(i).getFileName());
                             Uri myUri1 = Uri.fromFile(file);
                             mp = MediaPlayer.create(context, myUri1);
-                            Log.d("asdf","asdf");
                         }
-                        Log.d("Sound","Yay");
                     }
                     //plays a one-second-long silent track at the end to prevent the thread from ending before the last sound finishes playing
                     else{
@@ -110,9 +116,10 @@ public class PlayMediaPlayer implements Runnable {
         }
     }
 
-    //notifies the MediaPlayer that the user pressed the stop button
+    /**
+     * Notifies the MediaPlayer that the user pressed the stop button
+     */
     public void requestStop(){
-        Log.d("requestStop","stoppppppppp");
         stop = true;
     }
 }

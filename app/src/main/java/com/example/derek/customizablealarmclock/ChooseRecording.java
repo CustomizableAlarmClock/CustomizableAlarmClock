@@ -25,14 +25,14 @@ import java.util.ArrayList;
  * This page allows the user to choose a recording to put in the Alarm.
  */
 public class ChooseRecording extends AppCompatActivity {
-    Controller c;
+    Controller c; //Controller to handle the data
     Bundle bundle;
-    int code;
-    int alarmID;
-    int soundID;
+    int code; //determines if the user wants to add or change a Sound
+    int alarmID; //variable to keep track which Alarm data to use
+    int soundID; //variable to keep track which Sound data to use
     private static final int MY_PERMISSION_REQUEST = 1; //permission request result
-    ArrayList<String> arrayList; //arraylist to store title, author, and location
-    ArrayList<Sound> sounds;
+    ArrayList<String> arrayList; //ArrayList to store title, author, and location of the recordings
+    ArrayList<Sound> sounds; //ArrayList of Sound objects
     ListView listView;
     ArrayAdapter<String> adapter;
 
@@ -74,19 +74,26 @@ public class ChooseRecording extends AppCompatActivity {
     public void createAdapter() {
         listView = findViewById(R.id.ListViewChooseRecording);
         arrayList = new ArrayList<>();
-        getMusic();
+        getRecording();
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, arrayList);
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            /**
+             * Either adds or changes the Sound in the ArrayList of Sounds
+             * @param adapterView the AdapterView that displays the recordings
+             * @param view the View
+             * @param i the index of a recording
+             * @param l the id of a recording
+             */
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Log.d("ChooseRecording",String.valueOf(i));
                 if(code==0){
-                    c.getAlarms().get(alarmID).getSounds().add(sounds.get(i));
+                    c.getAlarms().get(alarmID).getSounds().add(sounds.get(i)); //adds a new Sound to the ArrayList
                 }
                 else{
-                    c.getAlarms().get(alarmID).getSounds().set(soundID, sounds.get(i));
+                    c.getAlarms().get(alarmID).getSounds().set(soundID, sounds.get(i)); //changes an existing Sound
                 }
                 Toast.makeText(getApplicationContext(), "Sound Added", Toast.LENGTH_LONG).show();
                 Intent intent= new Intent(view.getContext(), AllSounds.class);
@@ -95,8 +102,10 @@ public class ChooseRecording extends AppCompatActivity {
         });
     }
 
-    //gets the music and puts song information in the arrayList
-    public void getMusic() {
+    /**
+     * Gets the voice recording information in the ArrayList
+     */
+    public void getRecording() {
         ContentResolver contentResolver = getContentResolver();
         Uri songUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
         Cursor songCursor = contentResolver.query(songUri, null, null, null, null);
@@ -106,13 +115,13 @@ public class ChooseRecording extends AppCompatActivity {
             int songArtist = songCursor.getColumnIndex(MediaStore.Audio.Media.ARTIST);
             int songLocation = songCursor.getColumnIndex(MediaStore.Audio.Media.DATA);
             do {
-                //puts title, artist, and location in the arrayList
+                //puts title, artist, and location in the ArrayList
                 String currentTitle = songCursor.getString(songTitle);
                 String currentArtist = songCursor.getString(songArtist);
                 if(currentArtist.equals("<unknown>")){
                     currentArtist = "No Artist Info";
                 }
-                Log.d("currentArtist",currentArtist);
+                Log.d("currentArtist", currentArtist);
                 String currentLocation = songCursor.getString(songLocation);
                 if(currentLocation.contains("Recorder")) {
                     arrayList.add(currentTitle + "\n" + "Artist: " + currentArtist);
@@ -121,9 +130,17 @@ public class ChooseRecording extends AppCompatActivity {
                 }
             } while (songCursor.moveToNext());
         }
+        if (songCursor != null) {
+            songCursor.close();
+        }
     }
 
-    //gets the result of permission request
+    /**
+     * Gets the result of the permission request
+     * @param requestCode the request code
+     * @param permissions the permissions sent
+     * @param grantResults the results of the permissions
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {

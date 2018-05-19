@@ -5,7 +5,6 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -20,27 +19,34 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
-// code used from https://www.youtube.com/watch?v=kf2fxYLOiSo
+/**
+ * This page allows the user to choose a song from the music library.
+ * https://www.youtube.com/watch?v=kf2fxYLOiSo
+ */
 public class ChooseSong extends AppCompatActivity {
-    Controller c;
+    Controller c; //Controller to handle the data
     Bundle bundle;
-    int code;
-    int alarmID;
-    int soundID;
+    int code; //determines if the user wants to add or change a Sound
+    int alarmID; //variable to keep track which Alarm data to use
+    int soundID; //variable to keep track which Sound data to use
     private static final int MY_PERMISSION_REQUEST = 1; //permission request result
-    ArrayList<String> arrayList; //arraylist to store title, author, and location
-    ArrayList<Sound> sounds;
+    ArrayList<String> arrayList; //ArrayList to store title, author, and location of the recordings
+    ArrayList<Sound> sounds; //ArrayList of Sound objects
     ListView listView;
     ArrayAdapter<String> adapter;
+
+    /**
+     * Creates the ChooseSong page
+     * @param savedInstanceState Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_song);
 
+        //defines some variables
         c = (Controller) getApplicationContext();
         alarmID = c.getCurrentAlarmID();
         soundID = c.getCurrentSoundID();
@@ -75,12 +81,15 @@ public class ChooseSong extends AppCompatActivity {
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            /**
+             * Either adds or changes the Sound in the ArrayList of Sounds
+             * @param adapterView the AdapterView that displays the songs
+             * @param view the View
+             * @param i the index of a song
+             * @param l the id of a song
+             */
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                //asdf(i);
-
-
                 Log.d("ChooseSong",String.valueOf(i));
                 if(code==0){
                     c.getAlarms().get(alarmID).getSounds().add(sounds.get(i));
@@ -95,29 +104,9 @@ public class ChooseSong extends AppCompatActivity {
         });
     }
 
-    public void asdf(int i){
-        MediaPlayer mp = new MediaPlayer();
-        String fileName = sounds.get(i).getFileName();
-        File file = new File(fileName);
-        Log.d("filename",String.valueOf(fileName));
-        Uri myUri1 = Uri.fromFile(file);
-
-        try {
-            mp.setDataSource(this, myUri1);
-            mp.prepare();
-            Log.d("asdf","asdf");
-            mp.start();
-            if(mp.isPlaying()){
-                Log.d("Yay","Its playing");
-            }
-            else{
-                Log.d("a","ffffffffffff");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    //gets the music and puts song information in the arrayList
+    /**
+     * Gets the music and puts song information in the ArrayList
+     */
     public void getMusic() {
         ContentResolver contentResolver = getContentResolver();
         Uri songUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
@@ -128,7 +117,7 @@ public class ChooseSong extends AppCompatActivity {
             int songArtist = songCursor.getColumnIndex(MediaStore.Audio.Media.ARTIST);
             int songLocation = songCursor.getColumnIndex(MediaStore.Audio.Media.DATA);
             do {
-                //puts title, artist, and location in the arrayList
+                //puts title, artist, and location in the ArrayList
                 String currentTitle = songCursor.getString(songTitle);
                 String currentArtist = songCursor.getString(songArtist);
                 if(currentArtist.equals("<unknown>")){
@@ -143,9 +132,17 @@ public class ChooseSong extends AppCompatActivity {
                 }
             } while (songCursor.moveToNext());
         }
+        if (songCursor != null) {
+            songCursor.close();
+        }
     }
 
-    //gets the result of permission request
+    /**
+     * Gets the result of the permission request
+     * @param requestCode the request code
+     * @param permissions the permissions sent
+     * @param grantResults the results of the permissions
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {

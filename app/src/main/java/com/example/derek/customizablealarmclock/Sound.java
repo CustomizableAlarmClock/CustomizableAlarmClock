@@ -4,13 +4,17 @@ package com.example.derek.customizablealarmclock;
  * Created by Derek on 4/13/2018.
  * The Sound object is a sound that will be played in an alarm.
  */
-
 public class Sound {
     private String soundName;
     private String fileName;
     private int id;
 
-    //creates a Sound object
+    /**
+     * Constructs a Sound object
+     * @param soundName the Sound name
+     * @param fileName the file name
+     * @param id the id of the Sound object
+     */
     Sound(String soundName, String fileName, int id){
         this.soundName = soundName;
         this.fileName = fileName;
