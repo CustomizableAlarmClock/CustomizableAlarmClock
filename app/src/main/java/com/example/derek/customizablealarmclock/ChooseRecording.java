@@ -5,7 +5,6 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -20,10 +19,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * This page allows the user to choose a recording to put in the Alarm.
+ */
 public class ChooseRecording extends AppCompatActivity {
     Controller c;
     Bundle bundle;
@@ -35,6 +35,11 @@ public class ChooseRecording extends AppCompatActivity {
     ArrayList<Sound> sounds;
     ListView listView;
     ArrayAdapter<String> adapter;
+
+    /**
+     * Creates the ChooseRecordings page
+     * @param savedInstanceState Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,10 +81,6 @@ public class ChooseRecording extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                //asdf(i);
-
-
                 Log.d("ChooseRecording",String.valueOf(i));
                 if(code==0){
                     c.getAlarms().get(alarmID).getSounds().add(sounds.get(i));
@@ -94,28 +95,6 @@ public class ChooseRecording extends AppCompatActivity {
         });
     }
 
-    public void asdf(int i){
-        MediaPlayer mp = new MediaPlayer();
-        String fileName = sounds.get(i).getFileName();
-        File file = new File(fileName);
-        Log.d("filename",String.valueOf(fileName));
-        Uri myUri1 = Uri.fromFile(file);
-
-        try {
-            mp.setDataSource(this, myUri1);
-            mp.prepare();
-            Log.d("asdf","asdf");
-            mp.start();
-            if(mp.isPlaying()){
-                Log.d("Yay","Its playing");
-            }
-            else{
-                Log.d("a","ffffffffffff");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
     //gets the music and puts song information in the arrayList
     public void getMusic() {
         ContentResolver contentResolver = getContentResolver();
@@ -163,7 +142,9 @@ public class ChooseRecording extends AppCompatActivity {
         }
     }
 
-    //writes to txt file when activity is destroyed
+    /**
+     * Writes to a text file when the activity is destroyed
+     */
     @Override
     protected void onStop() {
         super.onStop();

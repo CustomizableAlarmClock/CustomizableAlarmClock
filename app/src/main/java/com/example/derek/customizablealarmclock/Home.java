@@ -16,7 +16,7 @@ public class Home extends AppCompatActivity {
         Button PresstoContinueButton = findViewById(R.id.PressToContinue);
         c = (Controller) getApplicationContext();
         Log.d("Home","Home");
-        //c.getDataFromFile();
+        c.getDataFromFile();
 
         PresstoContinueButton.setOnClickListener(new View.OnClickListener() {
             @Override

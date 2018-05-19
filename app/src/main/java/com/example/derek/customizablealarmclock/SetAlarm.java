@@ -15,13 +15,13 @@ public class SetAlarm {
     private Intent intent;
     private PendingIntent pendingIntent;
 
-    SetAlarm(Context context, int repeat, long timeInMillis){
+    SetAlarm(Context context, int repeat, long timeInMillis, int alarmID){
         this.context = context;
         this.repeat = repeat;
         this.timeInMillis = timeInMillis;
         alarmManager = (AlarmManager) this.context.getSystemService(Context.ALARM_SERVICE);
         intent = new Intent(context, AlarmReceiver.class);
-        pendingIntent = PendingIntent.getBroadcast(context, 1, intent, 0);
+        pendingIntent = PendingIntent.getBroadcast(context, alarmID, intent, 0);
     }
 
     public void setAlarm(){

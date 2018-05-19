@@ -18,6 +18,11 @@ import android.widget.Toast;
 
 import java.util.Calendar;
 
+/**
+ * The AlarmEdit screen where the user can set the time and date of the Alarm,
+ * in addition to setting the repeat, snooze, Sounds, and Alarm name. The user
+ * can also delete the alarm.
+ */
 public class AlarmEdit extends AppCompatActivity {
     TimePicker timePicker; //creates TimePicker for user to choose the time
     DatePicker datePicker; //creates DatePicker for a user to choose the date
@@ -30,12 +35,24 @@ public class AlarmEdit extends AppCompatActivity {
     PendingIntent pendingIntent;
     Context context;
 
+    /**
+     * Empty AlarmEdit Constructor
+     */
     public AlarmEdit(){
     }
+
+    /**
+     * Constructs an AlarmEdit with Context
+     * @param context the Context
+     */
     public AlarmEdit(Context context){
         this.context = context;
     }
 
+    /**
+     * Creates the AlarmEdit page
+     * @param savedInstanceState Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +90,10 @@ public class AlarmEdit extends AppCompatActivity {
             setCancel.setText("Set Alarm");
         }
         setCancel.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Enables or disables the Alarm
+             * @param v the View
+             */
             @Override
             public void onClick(View v) {
                 if(c.getAlarms().get(alarmID).getIsActive()){
@@ -86,9 +107,10 @@ public class AlarmEdit extends AppCompatActivity {
                         saveAlarmTime(); //gets the time that the alarm goes off at
                         c.getAlarms().get(alarmID).setActive(true);
                         setCancel.setText("Cancel Alarm");
-                        SetAlarm setAlarm = new SetAlarm(getApplicationContext(), c.getAlarms().get(alarmID).getRepeat(), c.getAlarms().get(alarmID).getTimeLeft());
+
+                        //Sets the alarm in the SetAlarm class
+                        SetAlarm setAlarm = new SetAlarm(getApplicationContext(), c.getAlarms().get(alarmID).getRepeat(), c.getAlarms().get(alarmID).getTimeLeft(), c.getCurrentAlarmID());
                         setAlarm.setAlarm();
-                        //setAlarm(calendar.getTimeInMillis(), c.getAlarms().get(alarmID).getRepeat()); //sets the alarm
                     } else {
                         Toast.makeText(getApplicationContext(), "No Sounds in Alarm", Toast.LENGTH_LONG).show();
                     }
@@ -102,6 +124,11 @@ public class AlarmEdit extends AppCompatActivity {
         Switch s = findViewById(R.id.SwitchSnooze);
         s.setChecked(c.getAlarms().get(c.getCurrentAlarmID()).getSnoozeActive()); //displays if snooze is enabled
         s.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            /**
+             * Sets the snooze when the Switch is tapped
+             * @param buttonView the Button
+             * @param isChecked if the Switch is checked
+             */
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 //sets if snooze is enabled
                 if(isChecked){
@@ -114,7 +141,9 @@ public class AlarmEdit extends AppCompatActivity {
         });
     }
 
-    //gets the time that the alarm goes off at
+    /**
+     * Gets the time that the alarm goes off at
+     */
     public void saveAlarmTime(){
         if (android.os.Build.VERSION.SDK_INT >= 23) {
             //puts into a calendar object the time the alarm goes off at
@@ -133,66 +162,32 @@ public class AlarmEdit extends AppCompatActivity {
         c.getAlarms().get(alarmID).setTimeLeft(calendar.getTimeInMillis()); //puts the time in milliseconds that the alarm goes off into the controller
     }
 
-    //sets the alarm
-    //https://developer.android.com/reference/android/app/AlarmManager.html
-    //https://developer.android.com/training/scheduling/alarms
-    public void setAlarm(long timeInMillis, int repeat) {
-        try{
-            alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        } catch (IllegalStateException e){
-            AlarmManager alarmManager = (AlarmManager) this.context.getSystemService(Context.ALARM_SERVICE);
-        }
-        Log.d("currentmili",String.valueOf(timeInMillis));
-        //goes to receiver when alarm goes off
-        Intent intent = new Intent(this, AlarmReceiver.class); //creates intent to go to the AlarmReceiver
-        try{
-            pendingIntent = PendingIntent.getBroadcast(this, 1, intent, 0);
-        } catch (NullPointerException e){
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(this.context, 1, intent, 0);
-            Log.d("PENNNNNNNNNNNNNNNN","OOOOOOOOOOOOOOOOOOOOOOOOOOO");
-        }
-        if (alarmManager != null) {
-
-            //switch deals with repeats: case 1: repeats every hour; case 2: repeats every day; case 3; repeats every week; default: no repeat
-            switch (repeat){
-                case 1:
-                    alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, timeInMillis, AlarmManager.INTERVAL_HOUR, pendingIntent);
-                    break;
-                case 2:
-                    alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, timeInMillis, AlarmManager.INTERVAL_DAY, pendingIntent);
-                    break;
-                case 3:
-                    alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, timeInMillis, AlarmManager.INTERVAL_DAY*7, pendingIntent);
-                    break;
-                default:
-                    alarmManager.set(AlarmManager.RTC_WAKEUP, timeInMillis, pendingIntent);
-                    break;
-            }
-        }
-
-        try{
-            Toast.makeText(context, "Alarm is set", Toast.LENGTH_SHORT).show(); //shows message that alarm is set
-        } catch (NullPointerException e){
-            Toast.makeText(this, "Alarm is set", Toast.LENGTH_LONG).show();
-        }
-    }
-
-    //allows user to change the alarm name
+    /**
+     * Goes to the AlarmName page
+     * Allows the user to change the alarm name
+     * @param v the View
+     */
     public void setAlarmName(View v){
         Intent intent = new Intent(this, AlarmName.class);
         saveAlarmTime();
         startActivity(intent);
     }
 
-    //allows user to choose when to repeat alarm
+    /**
+     * Goes to the AlarmRepeat page
+     * Allows the user to set the repeat
+     * @param v the view
+     */
     public void repeat(View v){
-        //goes to AlarmRepeat page
         Intent intent = new Intent(this, AlarmRepeat.class);
         saveAlarmTime();
         startActivity(intent);
     }
 
-    //deletes an alarm and goes back to AllAlarms
+    /**
+     * Deletes the Alarm before going back to the AllAlarms page
+     * @param v the View
+     */
     public void delete(View v){
         Intent intent = new Intent(this, AllAlarms.class);
         c.removeAlarm(alarmID);
@@ -200,26 +195,34 @@ public class AlarmEdit extends AppCompatActivity {
         startActivity(intent);
     }
 
-    //allows the user to view all sounds in the alarm
+    /**
+     * Goes to the AllSounds page
+     * Allows the user to view all Sounds in the Alarm
+     * @param v the View
+     */
     public void editSounds(View v){
-        //goes to AllSounds page
-        Intent intent = new Intent(this,AllSounds.class);
+        Intent intent = new Intent(this, AllSounds.class);
         saveAlarmTime();
         startActivity(intent);
     }
 
-    //goes back to the AllAlarms page
+    /**
+     * Goes back to the AllAlarms page
+     * @param v the View
+     */
     public void save(View v){
-        Intent intent = new Intent(this,AllAlarms.class);
+        Intent intent = new Intent(this, AllAlarms.class);
         saveAlarmTime();
         startActivity(intent);
     }
 
-    //writes to txt file when activity is destroyed
+    /**
+     * Writes to a text file when the activity is destroyed
+     */
     @Override
     protected void onStop() {
         super.onStop();
-        c.writeToFile(c.getFileName());
+        c.writeToFile(Controller.getFileName());
         Log.d("destroy","saved");
         Log.d("Alarm Size All Arl",String .valueOf(c.getAlarms().size()));
     }

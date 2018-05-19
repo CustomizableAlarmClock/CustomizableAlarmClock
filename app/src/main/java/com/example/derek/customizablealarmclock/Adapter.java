@@ -3,7 +3,6 @@ package com.example.derek.customizablealarmclock;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,21 +13,34 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-//https://www.youtube.com/watch?v=YaIcwyIF2-o
-
+/**
+ * Creates a custom adapter for the AllAlarms ListView
+ * https://www.youtube.com/watch?v=YaIcwyIF2-o
+ */
 public class Adapter extends ArrayAdapter<String> {
     Controller c;
 
-    public Adapter(Context context, ArrayList<String> records, Controller c){
+    /**
+     * Constructs the Adapter
+     * @param context the Context
+     * @param records the ArrayList of Alarms
+     * @param c the Controller
+     */
+    Adapter(Context context, ArrayList<String> records, Controller c){
         super(context, 0,  records);
         this.c = c;
     }
 
+    /**
+     * Overrides the getView method to display a custom ListView in the AllAlarms page
+     * @param position the index of an Alarm in the ArrayList of Alarms
+     * @param convertView a View
+     * @param parent a ViewGroup
+     * @return the View to be displayed in the custom ListView
+     */
     @NonNull
     @Override
     public View getView(final int position, View convertView, @NonNull ViewGroup parent){
-        //Get the data item for this position
-        String item = getItem(position);
         //Check if an existing view is being reused, otherwise inflate the view
         if(convertView == null){
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.listview_custom, parent, false);
@@ -39,6 +51,7 @@ public class Adapter extends ArrayAdapter<String> {
         final TextView alarmTime = convertView.findViewById(R.id.TextViewAlarmTime);
         final TextView alarmRepeat = convertView.findViewById(R.id.TextViewDisplayRepeat);
 
+        //displays the time that the Alarm goes off
         int month = c.getAlarms().get(position).getTime().getMonth();
         int day = c.getAlarms().get(position).getTime().getDay();
         int year = c.getAlarms().get(position).getTime().getYear();
@@ -66,9 +79,7 @@ public class Adapter extends ArrayAdapter<String> {
             alarmTime.setText(month+1 + "/" + day + "/" + year + " at " + hour + ":" + minute + " " + ampm);
         }
 
-        Log.d("switchChecked",String.valueOf(aSwitch.isChecked()));
-        Log.d("switchche",String.valueOf(aSwitch.isActivated()));
-        Log.d("sdfssdf",String.valueOf(c.getAlarms().get(position).getIsActive()));
+        //sets the Switch
         if(c.getAlarms().get(position).getIsActive()){
             aSwitch.setText("On");
         }
@@ -77,18 +88,25 @@ public class Adapter extends ArrayAdapter<String> {
         }
         aSwitch.setChecked(c.getAlarms().get(position).getIsActive());
         aSwitch.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Toggles the Switch when clicked
+             * @param view View of the ListView
+             */
             @Override
             public void onClick(View view) {
                 c.getAlarms().get(position).setActive(aSwitch.isChecked());
+                //Enables the Alarm
                 if(aSwitch.isChecked() && c.getAlarms().get(position).getSounds().size()>0){
                     aSwitch.setText("On");
-                    SetAlarm setAlarm = new SetAlarm(getContext(), c.getAlarms().get(position).getRepeat(), c.getAlarms().get(position).getTimeLeft());
+                    SetAlarm setAlarm = new SetAlarm(getContext(), c.getAlarms().get(position).getRepeat(), c.getAlarms().get(position).getTimeLeft(), c.getCurrentAlarmID());
                     setAlarm.setAlarm();
                 }
+                //Alarm enable attempted, but no sounds exist
                 else if(aSwitch.isChecked() && c.getAlarms().get(position).getSounds().size()==0){
                     Toast.makeText(view.getContext(), "No Sounds in Alarm", Toast.LENGTH_LONG).show();
                     aSwitch.setChecked(false);
                 }
+                //Disables the Alarm
                 else {
                     aSwitch.setText("Off");
                     c.getAlarms().get(position).setActive(false);
@@ -98,6 +116,10 @@ public class Adapter extends ArrayAdapter<String> {
         });
 
         alarmName.setOnClickListener(new View.OnClickListener(){
+            /**
+             * Goes to the AlarmEdit page if the user taps on the alarm name part of the ListView
+             * @param v the View
+             */
             @Override
             public void onClick(View v){
                 Intent intent = new Intent(v.getContext(), AlarmEdit.class);
@@ -107,6 +129,10 @@ public class Adapter extends ArrayAdapter<String> {
         });
 
         alarmTime.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Goes to the AlarmEdit page if the user taps on the time part of the ListView
+             * @param view the View
+             */
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), AlarmEdit.class);
@@ -116,6 +142,10 @@ public class Adapter extends ArrayAdapter<String> {
         });
 
         alarmRepeat.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Goes to the AlarmEdit page if the user taps on the repeat part of the ListView
+             * @param view the View
+             */
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), AlarmEdit.class);
@@ -124,6 +154,7 @@ public class Adapter extends ArrayAdapter<String> {
             }
         });
 
+        //Sets the text on the ListView to match the repeat setting of the Alarm
         switch (c.getAlarms().get(position).getRepeat()){
             case 1:
                 alarmRepeat.setText("Repeat: Every Hour");

@@ -10,6 +10,9 @@ import android.widget.Button;
 
 import java.util.ArrayList;
 
+/**
+ * This is the screen that shows when the Alarm goes off.
+ */
 public class AlarmReceiverScreen extends AppCompatActivity {
     MediaPlayer mp; //creates the MediaPlayer to play sounds
     ArrayList<Sound> sounds; //creates an ArrayList of sounds to be played in the alarm
@@ -17,6 +20,11 @@ public class AlarmReceiverScreen extends AppCompatActivity {
     Controller c; //Controller to handle the data
     PlayMediaPlayer playMediaPlayer; //creates the MediaPlayer object
     int alarmID; //variable to keep track which alarm data to use
+
+    /**
+     * Creates the AlarmReceiverScreen
+     * @param savedInstanceState Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,8 +59,7 @@ public class AlarmReceiverScreen extends AppCompatActivity {
             else {
                 soundID = 0;
             }
-
-                soundIDList.add(soundID);
+            soundIDList.add(soundID);
         }
 
         //creates a new thread to handle the playing of the sounds
@@ -62,20 +69,27 @@ public class AlarmReceiverScreen extends AppCompatActivity {
 
         //checks if the stop alarm button has been pressed
         snooze.setOnClickListener(new View.OnClickListener(){
+            /**
+             * Goes back to the AllAlarms page when snooze is tapped
+             * @param v the View
+             */
             public void onClick(View v){
                 playMediaPlayer.requestStop();
                 Log.d("AlarmReceiverScreen", String.valueOf(sounds.size()));
                 c.getAlarms().get(alarmID).setActive(false);
-                startActivity(intent);//goes to the AlarmEdit page
+                startActivity(intent);//goes to the AllAlarms page
             }
         });
     }
 
-    //stops the alarm and sets the alarm to go off in 10 minutes
+    /**
+     * Snoozes the Alarm for ten minutes
+     * @param v the View
+     */
     public void snooze(View v){
         playMediaPlayer.requestStop(); //stops current alarm
-        SetAlarm setAlarm = new SetAlarm(getApplicationContext(), c.getAlarms().get(alarmID).getRepeat(), c.getAlarms().get(alarmID).getTimeLeft());
-        setAlarm.setAlarm();
+        SetAlarm setAlarm = new SetAlarm(getApplicationContext(), c.getAlarms().get(alarmID).getRepeat(), c.getAlarms().get(alarmID).getTimeLeft(), c.getCurrentAlarmID());
+        setAlarm.setAlarm(); //sets the Alarm again
         Intent intent = new Intent(this, AllAlarms.class);
         startActivity(intent);
     }

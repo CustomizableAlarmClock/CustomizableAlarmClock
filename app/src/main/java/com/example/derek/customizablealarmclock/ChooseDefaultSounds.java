@@ -12,12 +12,20 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+/**
+ * This page allows the user to choose a default sound to put in the Alarm
+ */
 public class ChooseDefaultSounds extends AppCompatActivity {
     Controller c; //Controller to handle the data
-    int alarmID; //variable to keep track which alarm data to use
-    int soundID;
+    int alarmID; //variable to keep track which Alarm data to use
+    int soundID; //variable to keep track which Sound data to use
     Bundle bundle;
     int code;
+
+    /**
+     * Creates the ChooseDefaultSounds page
+     * @param savedInstanceState Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -139,10 +147,17 @@ public class ChooseDefaultSounds extends AppCompatActivity {
 
         //selects the sound that the user clicks on and returns to the SoundsEdit page
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            /**
+             * Adds the chosen Sound to the ArrayList of Sounds
+             * @param adapterView the AdapterView of the default sounds
+             * @param view the View
+             * @param i the index of a default sound
+             * @param l the id of the default sound
+             */
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 if(i>=0) {
-                    Log.d("Predownload", String.valueOf(defaultSounds.get(i)));
+                    Log.d("Default", String.valueOf(defaultSounds.get(i)));
                     if(code==0){
                         c.getAlarms().get(alarmID).getSounds().add(defaultSounds.get(i));
                     }
@@ -157,7 +172,9 @@ public class ChooseDefaultSounds extends AppCompatActivity {
         });
     }
 
-    //writes to txt file when activity is destroyed
+    /**
+     * Writes to a text file when the activity is destroyed
+     */
     @Override
     protected void onStop() {
         super.onStop();

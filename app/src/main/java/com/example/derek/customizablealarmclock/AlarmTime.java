@@ -4,10 +4,8 @@ import java.util.Calendar;
 
 /**
  * Created by Derek on 4/30/2018.
- *
- * Time that an alarm will go off
+ * Creates an object of the time when the Alarm will go off
  */
-
 public class AlarmTime {
     private int year;
     private int month;
@@ -15,8 +13,15 @@ public class AlarmTime {
     private int hour;
     private int minute;
 
-    //Constructor for the AlarmTime
-    public AlarmTime(int year, int month, int day, int hour, int minute){
+    /**
+     * Constructor for the AlarmTime object
+     * @param year the year the Alarm goes off
+     * @param month the month the Alarm goes off
+     * @param day the day of the month the Alarm goes off
+     * @param hour the hour the Alarm goes off
+     * @param minute the minute the Alarm goes off
+     */
+    AlarmTime(int year, int month, int day, int hour, int minute){
         this.year = year;
         this.month = month;
         this.day = day;
@@ -24,8 +29,11 @@ public class AlarmTime {
         this.minute = minute;
     }
 
-    //default Constructor for the AlarmTime - 1 hour after the current time
-    public AlarmTime(){
+    /**
+     * The default constructor for the AlarmTime object
+     * Sets the Alarm to go off one hour after the current time
+     */
+    AlarmTime(){
         Calendar c = Calendar.getInstance();
         year = c.get(Calendar.YEAR);
         month = c.get(Calendar.MONTH);
@@ -33,33 +41,48 @@ public class AlarmTime {
         if(c.get(Calendar.HOUR_OF_DAY)==23) {
             hour = 0;
         }
-        else{
+        else {
             hour = c.get(Calendar.HOUR_OF_DAY);
         }
         minute = c.get(Calendar.MINUTE);
     }
 
-    //gets the year that the alarm is to go off at
+    /**
+     * Gets the year the Alarm will go off
+     * @return the year the Alarm will go off
+     */
     public int getYear(){
         return year;
     }
 
-    //gets the month that the alarm is to go off at
+    /**
+     * Gets the month the Alarm will go off
+     * @return the month the Alarm will go off
+     */
     public int getMonth(){
         return month;
     }
 
-    //gets the day that the alarm is to go off at
+    /**
+     * Gets the day of the month the Alarm will go off
+     * @return the day of the month the Alarm will go off
+     */
     public int getDay(){
         return day;
     }
 
-    //gets the hour that the alarm is to go off at
+    /**
+     * Gets the hour the Alarm will go off
+     * @return the hour the Alarm will go off
+     */
     public int getHour(){
         return hour;
     }
 
-    //returns the minute that the alarm is to go off at
+    /**
+     * Gets the minute the Alarm will go off
+     * @return the minute the Alarm will go off
+     */
     public int getMinute(){
         return minute;
     }

@@ -13,9 +13,17 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+/**
+ * This page allows the user to set when the Alarm repeats.
+ */
 public class AlarmRepeat extends AppCompatActivity {
     Controller c; //Controller to handle the data
     int alarmID; //variable to keep track which alarm data to use
+
+    /**
+     * Creates the AlarmRepeat screen
+     * @param savedInstanceState Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,20 +62,28 @@ public class AlarmRepeat extends AppCompatActivity {
 
         //sets the repeat when an option is clicked on
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
+            /**
+             * Allows the user to select which Alarm to edit
+             * @param adapterView the AdapterView with the repeat options
+             * @param view the View
+             * @param i the index of a repeat option
+             * @param l the id of the option that was clicked
+             */
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-            if(i>=0) {
-                Intent intent = new Intent(view.getContext(),AlarmEdit.class);
-                c.getAlarms().get(alarmID).setRepeat(i);
-                Toast.makeText(getApplicationContext(),"Repeat Set",Toast.LENGTH_LONG).show();
-                startActivity(intent);
-            }
+                if(i>=0) {
+                    Intent intent = new Intent(view.getContext(),AlarmEdit.class);
+                    c.getAlarms().get(alarmID).setRepeat(i);
+                    Toast.makeText(getApplicationContext(),"Repeat Set",Toast.LENGTH_LONG).show();
+                    startActivity(intent);
+                }
             }
         });
     }
 
-    //writes to txt file when activity is destroyed
+    /**
+     * Writes to a text file when the activity is destroyed
+     */
     @Override
     protected void onStop() {
         super.onStop();

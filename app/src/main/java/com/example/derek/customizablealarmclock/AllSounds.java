@@ -14,6 +14,9 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+/**
+ * This page displays all the Sounds that is in an Alarm
+ */
 public class AllSounds extends AppCompatActivity {
     private ArrayList<String> soundNames; //creates a list of sound names (which the user can change) to be displayed in the ListView
     private EditText txtInput; //creates the text input for adding a Sound
@@ -21,6 +24,10 @@ public class AllSounds extends AppCompatActivity {
     int alarmID; //variable to keep track which alarm data to use
     Controller c; //Controller to handle the data
 
+    /**
+     * Creates the AllSounds page
+     * @param savedInstanceState Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,19 +56,29 @@ public class AllSounds extends AppCompatActivity {
             Log.d("AllSounds", "indexoutofbounds");
         }
 
-        //Add a Sound
         Button btAdd = findViewById(R.id.ButtonAddSound);
         btAdd.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Allows the user to add a new Sound
+             * Goes to the NewSoundSource page
+             * @param v the View
+             */
             @Override
-            //Goes to the SoundsEdit page
             public void onClick(View v) {
-            Intent intent = new Intent(listView.getContext(), NewSoundSource.class);
-            startActivity(intent);
+                Intent intent = new Intent(listView.getContext(), NewSoundSource.class);
+                startActivity(intent);
             }
         });
 
-        //Goes to the specific SoundsEdit page when a sound is clicked
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            /**
+             * Allows the user to edit a specific Sound
+             * Goes to the SoundsEdit page
+             * @param adapterView the AdapterView with the Sound objects
+             * @param view the View
+             * @param i the index of a Sound object
+             * @param l the id of a Sound object
+             */
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 if(i>=0) {
@@ -73,14 +90,19 @@ public class AllSounds extends AppCompatActivity {
         });
     }
 
-    //goes to the Alarm Edit page
+    /**
+     * Goes back to the AlarmEdit page
+     * @param v the View
+     */
     public void toAlarmEdit(View v){
         Intent intent = new Intent(this, AlarmEdit.class);
         Toast.makeText(getApplicationContext(), "Sounds Saved", Toast.LENGTH_LONG).show();
         startActivity(intent);
     }
 
-    //writes to txt file when activity is destroyed
+    /**
+     * Writes to a text file when the activity is destroyed
+     */
     @Override
     protected void onStop() {
         super.onStop();

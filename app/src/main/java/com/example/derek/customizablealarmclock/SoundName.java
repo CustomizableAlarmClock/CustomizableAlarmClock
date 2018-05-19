@@ -35,7 +35,9 @@ public class SoundName extends AppCompatActivity {
         startActivity(intent);
     }
 
-    //writes to txt file when activity is destroyed
+    /**
+     * Writes to a text file when the activity is destroyed
+     */
     @Override
     protected void onStop() {
         super.onStop();

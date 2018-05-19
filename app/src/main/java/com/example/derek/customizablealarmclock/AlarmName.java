@@ -9,10 +9,18 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * Allows the user to edit the name of the Alarm
+ */
 public class AlarmName extends AppCompatActivity {
     Controller c; //Controller to handle the data
     EditText editText; //creates the object that allows the user to edit the alarm name
     int alarmID; //variable to keep track which alarm data to use
+
+    /**
+     * Creates the AlarmName page
+     * @param savedInstanceState Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +34,11 @@ public class AlarmName extends AppCompatActivity {
         editText.setText(c.getAlarms().get(alarmID).getAlarmName(), TextView.BufferType.EDITABLE); //puts the text from the textbox into the editText variable
     }
 
-    //changes the alarm name
+    /**
+     * Sets the name of the Alarm
+     * Goes back to the AlarmEdit page
+     * @param v the View
+     */
     public void setAlarmName(View v){
         c.getAlarms().get(alarmID).setAlarmName(editText.getText().toString());
         Intent intent = new Intent(this, AlarmEdit.class);
@@ -34,7 +46,9 @@ public class AlarmName extends AppCompatActivity {
         startActivity(intent);
     }
 
-    //writes to txt file when activity is destroyed
+    /**
+     * Writes to a text file when the activity is destroyed
+     */
     @Override
     protected void onStop() {
         super.onStop();

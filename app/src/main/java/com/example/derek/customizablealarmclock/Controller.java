@@ -18,50 +18,83 @@ import java.util.ArrayList;
  * Created by Derek on 4/27/2018.
  * Controller to handle data
  */
-
 public class Controller extends Application {
     private ArrayList<Alarm> alarms = new ArrayList<>();
     private int currentAlarmID;
     private int currentSoundID;
     private File f;
 
+    /**
+     * Adds an alarm to the Alarm ArrayList
+     * @param a the alarm to be added
+     */
     public void addAlarm(Alarm a){
         alarms.add(a);
     }
 
+    /**
+     * Removes an alarm from the ArrayList
+     * @param i the index of the Alarm to be removed
+     */
     public void removeAlarm(int i){
         alarms.remove(i);
     }
 
+    /**
+     * Gets the ArrayList of Alarms
+     * @return the ArrayList of Alarms
+     */
     public ArrayList<Alarm> getAlarms(){
         return alarms;
     }
 
+    /**
+     * Gets the current Alarm
+     * @return the current Alarm
+     */
     public int getCurrentAlarmID(){
         return currentAlarmID;
     }
 
+    /**
+     * Sets the current Alarm
+     * @param alarmID the current Alarm
+     */
     public void setCurrentAlarmID(int alarmID){
         currentAlarmID = alarmID;
     }
 
+    /**
+     * Gets the current Sound
+     * @return the current Sound
+     */
     public int getCurrentSoundID(){
         return currentSoundID;
     }
 
+    /**
+     * Sets the current Sound
+     * @param soundID the current Sound
+     */
     public void setCurrentSoundID(int soundID){
         currentSoundID = soundID;
     }
 
-    //creates file name
+    /**
+     * Gets the file name
+     * @return the file name
+     */
     public static String getFileName(){
         String filename;
         filename = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "data.txt";
         return filename;
     }
 
-    //determines how many data entries there are
-    private int getFileLength(String filename) {
+    /**
+     * Determines the length of the text file
+     * @return the length of the text file
+     */
+    private int getFileLength() {
         FileInputStream fileInputStream;
         BufferedReader inputReader = null;
         try {
@@ -83,7 +116,7 @@ public class Controller extends Application {
         catch (IOException e) {
             System.out.println(e.getMessage());
         }
-        finally{
+        finally {
             try {
                 if(inputReader!=null) {
                     inputReader.close();
@@ -96,6 +129,9 @@ public class Controller extends Application {
         return i;
     }
 
+    /**
+     * Reads the data from the text file
+     */
     public void getDataFromFile(){
         f = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "data.txt");
         Log.d("asdffff","we");
@@ -126,9 +162,9 @@ public class Controller extends Application {
         AlarmTime alarmTime = new AlarmTime();
 
         try{
-            while (i<getFileLength(getFileName())){
+            while (i<getFileLength()){
                 Log.d("Read",String.valueOf(i));
-                Log.d("Read2",String.valueOf(getFileLength(getFileName())));
+                Log.d("Read2",String.valueOf(getFileLength()));
                 line = inputReader.readLine();
                 if(line==null){
                     break;
@@ -189,23 +225,15 @@ public class Controller extends Application {
         }
     }
 
-    //creates file and writes data to file
+    /**
+     * Creates text file if it does not exist yet
+     * Writes data to text file
+     * @param filename the name of the file
+     */
     public void writeToFile (String filename){
         BufferedWriter outputWriter;
         try {
-            //f.delete();
-            /*
-            f = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "data.txt");
-
-            Log.d("asdffff","we");
-                Log.d("CREATENEW", "createnewfile");
-                try {
-                    f.createNewFile();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-*/
-            outputWriter = new BufferedWriter(new FileWriter(filename));
+            outputWriter = new BufferedWriter(new FileWriter(filename, false));
             for(int i = 0; i<alarms.size(); i++){
                 Log.d("i1",String.valueOf(i));
                 Log.d("Alarm Size Controller", String.valueOf(alarms.size()));
@@ -260,7 +288,6 @@ public class Controller extends Application {
                 outputWriter.write(String.valueOf(alarms.get(i).getTime().getMinute()));
                 outputWriter.newLine();
             }
-            outputWriter.flush();
             outputWriter.close();
         }
         catch (IOException e) {
