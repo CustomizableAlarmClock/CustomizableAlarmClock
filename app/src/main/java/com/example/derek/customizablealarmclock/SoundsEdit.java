@@ -10,10 +10,18 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+/**
+ * This page allows a user to edit a Sound
+ */
 public class SoundsEdit extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     int alarmID; //variable to keep track which alarm data to use
     Controller c; //Controller to handle the data
     int soundID; //variable to keep track which sound data to use
+
+    /**
+     * Creates the SoundsEdit page
+     * @param savedInstanceState Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -23,6 +31,7 @@ public class SoundsEdit extends AppCompatActivity implements AdapterView.OnItemS
         c = (Controller) getApplicationContext();
         alarmID = c.getCurrentAlarmID();
         soundID = c.getCurrentSoundID();
+
         //Drop down menu to choose sound source
         Spinner spinner = findViewById(R.id.spinnerSoundSource);
         ArrayAdapter<CharSequence>adapter = ArrayAdapter.createFromResource(this, R.array.sources, android.R.layout.simple_spinner_item);
@@ -31,19 +40,29 @@ public class SoundsEdit extends AppCompatActivity implements AdapterView.OnItemS
         spinner.setOnItemSelectedListener(this);
     }
 
-    //goes to AllSounds page
+    /**
+     * Goes back to the AllSounds page
+     * @param v the View
+     */
     public void toAllSounds(View v){
         Intent intent = new Intent(this, AllSounds.class);
         startActivity(intent);
     }
 
-    //goes to SoundName page
+    /**
+     * Allows the user to change the name of the Sound object
+     * Goes to the SoundName page
+     * @param v the View
+     */
     public void changeSoundName(View v){
         Intent intent = new Intent(this, SoundName.class);
         startActivity(intent);
     }
 
-    //deletes a sound
+    /**
+     * Allows the user to delete the Sound object before going back to the AllSounds page
+     * @param v the View
+     */
     public void delete(View v){
         Intent intent = new Intent(this, AllSounds.class);
         c.getAlarms().get(alarmID).getSounds().remove(soundID);
@@ -51,9 +70,15 @@ public class SoundsEdit extends AppCompatActivity implements AdapterView.OnItemS
         startActivity(intent);
     }
 
+    /**
+     * Goes to a choose sound source page when the user selects a source from the Spinner
+     * https://stackoverflow.com/questions/19914511/how-to-start-another-activity-when-click-on-item-from-spinner-items
+     * @param adapterView the AdapterView of the sources
+     * @param view the View
+     * @param i the index of a source
+     * @param l the id of a source
+     */
     @Override
-    //goes to the choose source pages when clicked
-    //https://stackoverflow.com/questions/19914511/how-to-start-another-activity-when-click-on-item-from-spinner-items
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         Intent intent;
         switch (i){
@@ -77,6 +102,10 @@ public class SoundsEdit extends AppCompatActivity implements AdapterView.OnItemS
         }
     }
 
+    /**
+     * When nothing is selected in the spinner, nothing happens
+     * @param adapterView the AdapterView of the sources
+     */
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 

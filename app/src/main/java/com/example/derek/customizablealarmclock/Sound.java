@@ -21,32 +21,50 @@ public class Sound {
         this.id = id;
     }
 
-    //returns the name of the sound
+    /**
+     * Gets the Sound name of a Sound object
+     * @return the Sound name of a Sound object
+     */
     public String getSoundName(){
         return soundName;
     }
 
-    //returns the name of the sound file
+    /**
+     * Gets the file name of a Sound object
+     * @return the file name of a Sound object
+     */
     public String getFileName(){
         return fileName;
     }
 
-    //returns the id number of the sound object
+    /**
+     * Gets the id of a Sound object
+     * @return the id of a Sound object
+     */
     public int getId(){
         return id;
     }
 
-    //changes the name of the sound
+    /**
+     * Sets the name of a Sound object
+     * @param soundName the name of a Sound object
+     */
     public void setSoundName(String soundName){
         this.soundName = soundName;
     }
 
-    //changes the file name
+    /**
+     * Sets the file name of a Sound object
+     * @param fileName the file name of a Sound object
+     */
     public void setFileName(String fileName){
         this.fileName = fileName;
     }
 
-    //changes the id of the sound object
+    /**
+     * Sets the id of a Sound object
+     * @param id the id of a Sound object
+     */
     public void setId(int id){
         this.id = id;
     }

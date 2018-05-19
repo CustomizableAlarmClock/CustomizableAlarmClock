@@ -9,11 +9,19 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * This page allows the user to change the name of a Sound object.
+ */
 public class SoundName extends AppCompatActivity {
     Controller c; //Controller to handle the data
     int alarmID; //variable to keep track which alarm data to use
     int soundID; //variable to keep track which sound data to use
     EditText editText; //creates the object that allows the user to edit the sound name
+
+    /**
+     * Creates the SoundName page
+     * @param savedInstanceState Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,10 +32,14 @@ public class SoundName extends AppCompatActivity {
         alarmID = c.getCurrentAlarmID();
         soundID = c.getCurrentSoundID();
         editText = findViewById(R.id.editTextChangeSoundName);
+
         editText.setText(c.getAlarms().get(alarmID).getSounds().get(soundID).getSoundName(), TextView.BufferType.EDITABLE); //gets the text from the textbox
     }
 
-    //sets the new name of the sound
+    /**
+     * Sets the new name of a Sound
+     * @param v the View
+     */
     public void setSoundName(View v){
         Intent intent = new Intent(this, SoundsEdit.class);
         c.getAlarms().get(alarmID).getSounds().get(soundID).setSoundName(editText.getText().toString()); //sets the new sound name
