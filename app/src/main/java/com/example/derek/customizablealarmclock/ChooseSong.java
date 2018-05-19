@@ -90,7 +90,6 @@ public class ChooseSong extends AppCompatActivity {
              */
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Log.d("ChooseSong",String.valueOf(i));
                 if(code==0){
                     c.getAlarms().get(alarmID).getSounds().add(sounds.get(i));
                 }
@@ -123,7 +122,6 @@ public class ChooseSong extends AppCompatActivity {
                 if(currentArtist.equals("<unknown>")){
                     currentArtist = "No Artist Info";
                 }
-                Log.d("currentArtist",currentArtist);
                 String currentLocation = songCursor.getString(songLocation);
                 if(currentLocation.contains("Music")) {
                     arrayList.add(currentTitle + "\n" + "Artist: " + currentArtist);
@@ -169,5 +167,6 @@ public class ChooseSong extends AppCompatActivity {
         super.onStop();
         c.writeToFile(Controller.getFileName());
         Log.d("destroy","saved");
+        Log.d("ChooseSong", "Alarm Size" + String.valueOf(c.getAlarms().size()));
     }
 }

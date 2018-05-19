@@ -54,5 +54,6 @@ public class AlarmName extends AppCompatActivity {
         super.onStop();
         c.writeToFile(Controller.getFileName());
         Log.d("destroy","saved");
+        Log.d("AlarmName", "Alarm Size" + String.valueOf(c.getAlarms().size()));
     }
 }

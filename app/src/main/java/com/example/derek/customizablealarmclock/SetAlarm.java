@@ -4,7 +4,6 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.widget.Toast;
 
 /**
@@ -37,7 +36,6 @@ public class SetAlarm {
      * Sets the Alarm
      */
     public void setAlarm(){
-        Log.d("AYYYYYYYY","ASDFDASDFDSA");
         if (alarmManager != null) {
             //switch deals with repeats: case 1: repeats every hour; case 2: repeats every day; case 3; repeats every week; default: no repeat
             switch (repeat){

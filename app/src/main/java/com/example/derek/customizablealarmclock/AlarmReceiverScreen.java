@@ -51,7 +51,7 @@ public class AlarmReceiverScreen extends AppCompatActivity {
 
         //loads the soundIDs into the soundID ArrayList
         for(int j = 0; j<sounds.size();j++){
-            Log.d("SoundsSize", String.valueOf(sounds.size()+" "+j));
+            Log.d("AlarmReceiverScreen", "Playing Sound " + String.valueOf(j) + " of " + String.valueOf(sounds.size()));
             int soundID;
             if(c.getAlarms().get(c.getCurrentAlarmID()).getSounds().get(j).getId()==0) {
                 soundID = AlarmReceiverScreen.this.getResources().getIdentifier(sounds.get(j).getFileName(), "raw", AlarmReceiverScreen.this.getPackageName()); //creates the sound id for the sounds
@@ -64,7 +64,6 @@ public class AlarmReceiverScreen extends AppCompatActivity {
 
         //creates a new thread to handle the playing of the sounds
         Thread thread = new Thread(playMediaPlayer);
-        Log.d("START","STARTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");
         thread.start();
 
         //checks if the stop alarm button has been pressed
@@ -75,7 +74,6 @@ public class AlarmReceiverScreen extends AppCompatActivity {
              */
             public void onClick(View v){
                 playMediaPlayer.requestStop();
-                Log.d("AlarmReceiverScreen", String.valueOf(sounds.size()));
                 c.getAlarms().get(alarmID).setActive(false);
                 startActivity(intent);//goes to the AllAlarms page
             }

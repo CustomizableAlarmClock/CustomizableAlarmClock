@@ -1,7 +1,5 @@
 package com.example.derek.customizablealarmclock;
 
-import android.app.AlarmManager;
-
 import java.util.ArrayList;
 
 /**
@@ -17,7 +15,6 @@ public class Alarm {
     private boolean isActive;
     private boolean snoozeActive;
     private int id;
-    private AlarmManager alarmManager;
 
     /**
      * Creates an Alarm object

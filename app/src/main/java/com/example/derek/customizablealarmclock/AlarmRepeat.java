@@ -89,5 +89,6 @@ public class AlarmRepeat extends AppCompatActivity {
         super.onStop();
         c.writeToFile(c.getFileName());
         Log.d("destroy","saved");
+        Log.d("AlarmRepeat", "Alarm Size" + String.valueOf(c.getAlarms().size()));
     }
 }

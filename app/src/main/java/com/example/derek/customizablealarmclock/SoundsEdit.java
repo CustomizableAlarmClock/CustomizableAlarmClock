@@ -119,5 +119,6 @@ public class SoundsEdit extends AppCompatActivity implements AdapterView.OnItemS
         super.onStop();
         c.writeToFile(Controller.getFileName());
         Log.d("destroy","saved");
+        Log.d("SoundsEdit", "Alarm Size" + String.valueOf(c.getAlarms().size()));
     }
 }

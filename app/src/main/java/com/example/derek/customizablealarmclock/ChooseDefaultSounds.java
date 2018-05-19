@@ -157,7 +157,6 @@ public class ChooseDefaultSounds extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 if(i>=0) {
-                    Log.d("Default", String.valueOf(defaultSounds.get(i)));
                     if(code==0){
                         c.getAlarms().get(alarmID).getSounds().add(defaultSounds.get(i));
                     }
@@ -180,5 +179,6 @@ public class ChooseDefaultSounds extends AppCompatActivity {
         super.onStop();
         c.writeToFile(Controller.getFileName());
         Log.d("destroy","saved");
+        Log.d("ChooseDefaultSounds", "Alarm Size" + String.valueOf(c.getAlarms().size()));
     }
 }

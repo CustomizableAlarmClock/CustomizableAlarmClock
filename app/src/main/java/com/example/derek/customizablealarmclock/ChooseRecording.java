@@ -88,7 +88,6 @@ public class ChooseRecording extends AppCompatActivity {
              */
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Log.d("ChooseRecording",String.valueOf(i));
                 if(code==0){
                     c.getAlarms().get(alarmID).getSounds().add(sounds.get(i)); //adds a new Sound to the ArrayList
                 }
@@ -121,7 +120,6 @@ public class ChooseRecording extends AppCompatActivity {
                 if(currentArtist.equals("<unknown>")){
                     currentArtist = "No Artist Info";
                 }
-                Log.d("currentArtist", currentArtist);
                 String currentLocation = songCursor.getString(songLocation);
                 if(currentLocation.contains("Recorder")) {
                     arrayList.add(currentTitle + "\n" + "Artist: " + currentArtist);
@@ -167,5 +165,6 @@ public class ChooseRecording extends AppCompatActivity {
         super.onStop();
         c.writeToFile(Controller.getFileName());
         Log.d("destroy","saved");
+        Log.d("ChooseRecording", "Alarm Size" + String.valueOf(c.getAlarms().size()));
     }
 }

@@ -55,5 +55,6 @@ public class SoundName extends AppCompatActivity {
         super.onStop();
         c.writeToFile(Controller.getFileName());
         Log.d("destroy","saved");
+        Log.d("SoundName", "Alarm Size" + String.valueOf(c.getAlarms().size()));
     }
 }

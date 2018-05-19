@@ -83,7 +83,6 @@ public class AlarmEdit extends AppCompatActivity {
         //sets the alarm
         //https://www.concretepage.com/android/android-alarm-clock-tutorial-to-schedule-and-cancel-alarmmanager-pendingintent-and-wakefulbroadcastreceiver-example
         final Button setCancel = findViewById(R.id.ButtonSetAlarm);
-        Log.d("aactive",String.valueOf(c.getAlarms().get(alarmID).getIsActive()));
         if(c.getAlarms().get(alarmID).getIsActive()){
             setCancel.setText("Cancel Alarm");
         }
@@ -225,6 +224,6 @@ public class AlarmEdit extends AppCompatActivity {
         super.onStop();
         c.writeToFile(Controller.getFileName());
         Log.d("destroy","saved");
-        Log.d("Alarm Size All Arl",String .valueOf(c.getAlarms().size()));
+        Log.d("AlarmEdit", "Alarm Size" + String.valueOf(c.getAlarms().size()));
     }
 }

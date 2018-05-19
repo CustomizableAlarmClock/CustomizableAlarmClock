@@ -41,11 +41,7 @@ public class AllSounds extends AppCompatActivity {
         //creates a ListView with all the sounds to be played in a specific alarm
         final ListView listView = findViewById(R.id.AllSounds);
         try {
-            Log.d("AllSounds","asdfdsasdfdsa");
-            Log.d("AllSoundsSize",String.valueOf(c.getAlarms().get(alarmID).getSounds().size()));
-            Log.d("AllSoundsSize",String.valueOf(alarmID));
             for (int i = 0; i < c.getAlarms().get(alarmID).getSounds().size(); i++) {
-                Log.d("AllSounds",String.valueOf(c.getAlarms().get(alarmID).getSounds().size()));
                 soundNames.add(c.getAlarms().get(alarmID).getSounds().get(i).getSoundName());
             }
 
@@ -108,5 +104,6 @@ public class AllSounds extends AppCompatActivity {
         super.onStop();
         c.writeToFile(Controller.getFileName());
         Log.d("destroy","saved");
+        Log.d("AllSounds", "Alarm Size" + String.valueOf(c.getAlarms().size()));
     }
 }

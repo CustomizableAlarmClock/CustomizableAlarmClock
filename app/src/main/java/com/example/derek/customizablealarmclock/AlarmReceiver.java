@@ -34,13 +34,11 @@ public class AlarmReceiver extends BroadcastReceiver {
         //does not execute if there are no sounds in the list
         try{
             if(c.getAlarms().get(alarmID).getIsActive()){
-            //ArrayList<Sound> sounds = bundle.getParcelableArrayList("Sounds");
             ArrayList<Sound> sounds = c.getAlarms().get(alarmID).getSounds();
-            Log.d("AlarmReceiver2",String.valueOf(sounds.size()));
+            Log.d("AlarmReceiver", "Sound Size: " + String.valueOf(sounds.size()));
 
             //moves the ArrayList of file names to the AlarmReceiverScreen java class
             Intent i = new Intent();
-            Log.d("AlarmReceiver", String.valueOf(sounds.size()));
             i.setClassName(context.getPackageName(),AlarmReceiverScreen.class.getName());
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 

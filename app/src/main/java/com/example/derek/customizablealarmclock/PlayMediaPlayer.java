@@ -51,7 +51,7 @@ public class PlayMediaPlayer implements Runnable {
      * @param startTime the time at which the Alarm went off
      */
     private void play(long startTime){
-        //only plays sounds if there are sounds in the list
+        //only plays sounds if there are Sounds in the list
         try {
             MediaPlayer mp;
             if(c.getAlarms().get(alarmID).getSounds().get(0).getId()==0) {
@@ -61,12 +61,10 @@ public class PlayMediaPlayer implements Runnable {
                 File file = new File(c.getAlarms().get(alarmID).getSounds().get(0).getFileName());
                 Uri myUri1 = Uri.fromFile(file);
                 mp = MediaPlayer.create(context, myUri1);
-                Log.d("asdf","asdf");
             }
             mp.start(); //starts playing the first sound
 
             //checks the size of the list of sounds and plays that many sounds, also makes sure the MediaPlayer has not been called to stop yet
-            //Log.d("PlayMP", String.valueOf(sounds.size()));
             int i = 1;
             while(i<=sounds.size() && !stop) {
                 //checks if there is already a sound playing (prevents all the sounds from playing at once)

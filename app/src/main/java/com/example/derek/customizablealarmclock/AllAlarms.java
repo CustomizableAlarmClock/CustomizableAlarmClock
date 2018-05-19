@@ -102,6 +102,6 @@ public class AllAlarms extends AppCompatActivity {
         super.onStop();
         c.writeToFile(Controller.getFileName());
         Log.d("destroy","saved");
-        Log.d("Alarm Size All Arl",String .valueOf(c.getAlarms().size()));
+        Log.d("AllAlarms", "Alarm Size" + String.valueOf(c.getAlarms().size()));
     }
 }
